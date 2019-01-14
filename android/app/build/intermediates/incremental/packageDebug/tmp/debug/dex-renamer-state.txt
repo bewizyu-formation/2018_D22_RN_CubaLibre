@@ -1,0 +1,4 @@
+#Mon Jan 14 12:21:24 CET 2019
+base.0=/Users/formation9/ProjetReactNative/2018_D22_RN_CubaLibre/android/app/build/intermediates/transforms/dexMerger/debug/0
+path.0=classes.dex
+renamed.0=classes.dex
