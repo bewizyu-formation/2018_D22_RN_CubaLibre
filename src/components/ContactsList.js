@@ -7,7 +7,6 @@ export class ContactsList extends Component {
   render() {
     return (
         <View>
-            <Text>test Niko</Text>
             <ScrollView style={styles.scroll} >
                 <ContactItem name={"Test"}></ContactItem>
                 <ContactItem name={"Test 2"}></ContactItem>
