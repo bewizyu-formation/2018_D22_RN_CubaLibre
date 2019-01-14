@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>CU7M5VQDU5.org.reactjs.native.example.CubalibreFamilink</string>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>CU7M5VQDU5.org.reactjs.native.example.CubalibreFamilink</string>
+	</array>
+</dict>
+</plist>
