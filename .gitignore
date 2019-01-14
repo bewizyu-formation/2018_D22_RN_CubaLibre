@@ -45,8 +45,7 @@ buck-out
 .idea
 .gradle
 local.properties
-*.iml
-/android/
+*.imlx
 
 # Node
 node_modules
