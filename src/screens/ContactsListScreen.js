@@ -6,6 +6,10 @@ export const CONTACTSLIST_SCENE_NAME = 'CONTACTSLIST_SCENE';
 
 export default class ContactsListScreen extends Component {
 
+  static navigationOptions = {
+    title: 'List des contacts',
+  };
+
   render() {
     return (
         <ContactsListContainer/>
