@@ -23,10 +23,9 @@ export default class App extends Component {
     return (
       <View>
         <ContactContext.Provider value={this.state}>
-        <ContactsListScreen/>
-        {/* <NavigationContainer /> */}
+          <ContactsListScreen/>
+          {/* <NavigationContainer /> */}
         </ContactContext.Provider>
-        {/*<ContactsListScreen/>*/}
       </View>
     );
   }
