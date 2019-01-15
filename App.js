@@ -21,12 +21,10 @@ export default class App extends Component {
 
   render() {
     return (
-      <View>
         <ContactContext.Provider value={this.state}>
-          <ContactsListScreen/>
-          {/* <NavigationContainer /> */}
+          {/* <ContactsListScreen/> */}
+          <NavigationContainer />
         </ContactContext.Provider>
-      </View>
     );
   }
 }
