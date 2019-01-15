@@ -4,6 +4,7 @@ ADDED from /Users/formation9/ProjetReactNative/2018_D22_RN_CubaLibre/android/app
 INJECTED from /Users/formation9/ProjetReactNative/2018_D22_RN_CubaLibre/android/app/src/main/AndroidManifest.xml:1:1-26:12
 INJECTED from /Users/formation9/ProjetReactNative/2018_D22_RN_CubaLibre/android/app/src/main/AndroidManifest.xml:1:1-26:12
 INJECTED from /Users/formation9/ProjetReactNative/2018_D22_RN_CubaLibre/android/app/src/main/AndroidManifest.xml:1:1-26:12
+MERGED from [:react-native-gesture-handler] /Users/formation9/ProjetReactNative/2018_D22_RN_CubaLibre/node_modules/react-native-gesture-handler/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [com.facebook.react:react-native:0.57.8] /Users/formation9/.gradle/caches/transforms-1/files-1.1/react-native-0.57.8.aar/6c80291aa04631541925eb79c050bcc3/AndroidManifest.xml:2:1-15:12
 MERGED from [com.android.support:appcompat-v7:27.1.1] /Users/formation9/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/ef8c14ada829b91b908a67bb909a637a/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-fragment:27.1.1] /Users/formation9/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/4ea3bbe7ffffaed2721dc215cb22316a/AndroidManifest.xml:17:1-22:12
@@ -97,6 +98,8 @@ uses-sdk
 INJECTED from /Users/formation9/ProjetReactNative/2018_D22_RN_CubaLibre/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/formation9/ProjetReactNative/2018_D22_RN_CubaLibre/android/app/src/main/AndroidManifest.xml
 INJECTED from /Users/formation9/ProjetReactNative/2018_D22_RN_CubaLibre/android/app/src/main/AndroidManifest.xml
+MERGED from [:react-native-gesture-handler] /Users/formation9/ProjetReactNative/2018_D22_RN_CubaLibre/node_modules/react-native-gesture-handler/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-gesture-handler] /Users/formation9/ProjetReactNative/2018_D22_RN_CubaLibre/node_modules/react-native-gesture-handler/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.react:react-native:0.57.8] /Users/formation9/.gradle/caches/transforms-1/files-1.1/react-native-0.57.8.aar/6c80291aa04631541925eb79c050bcc3/AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.react:react-native:0.57.8] /Users/formation9/.gradle/caches/transforms-1/files-1.1/react-native-0.57.8.aar/6c80291aa04631541925eb79c050bcc3/AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:appcompat-v7:27.1.1] /Users/formation9/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/ef8c14ada829b91b908a67bb909a637a/AndroidManifest.xml:20:5-44
