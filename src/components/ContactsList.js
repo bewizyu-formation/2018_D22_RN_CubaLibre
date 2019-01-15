@@ -7,7 +7,9 @@ export class ContactsList extends Component {
   render() {
     return (
         <View>
-            <ScrollView style={styles.scroll} >
+            <Text>Test out</Text>
+            <ScrollView>
+                <Text>Test in</Text>
                 <ContactItem name={"Test"}></ContactItem>
                 <ContactItem name={"Test 2"}></ContactItem>
                 <ContactItem name={"Test 3"}></ContactItem>
@@ -18,8 +20,5 @@ export class ContactsList extends Component {
 }
 
 const styles = StyleSheet.create({
-    scroll : {
-        width: 200, 
-        height: 200
-    }
+
 });

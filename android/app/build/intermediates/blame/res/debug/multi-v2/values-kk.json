@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/formation9/ProjetReactNative/2018_D22_RN_CubaLibre/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-kk/values-kk.xml",
+            "outputFile": "/Users/nartawak/Workspaces/Playgrounds/2018_D22_RN_CubaLibre/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-kk/values-kk.xml",
             "map": [
                 {
-                    "source": "/Users/formation9/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/cff6d98b8231991775ea732f7e850217/res/values-kk/values-kk.xml",
+                    "source": "/Users/nartawak/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/f00925fabe18946c1e978e059fc337bf/res/values-kk/values-kk.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "/Users/formation9/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/ef8c14ada829b91b908a67bb909a637a/res/values-kk/values-kk.xml",
+                    "source": "/Users/nartawak/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/c69fda66b63818f4eedf36f3ab134310/res/values-kk/values-kk.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
