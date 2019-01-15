@@ -8,21 +8,21 @@ export class ContactsList extends Component {
     return (
         <View >
             <ScrollView>
-                <ContactItem name={"Test"}></ContactItem>
+                <ContactItem name={"Test 1"}></ContactItem>
                 <ContactItem name={"Test 2"}></ContactItem>
                 <ContactItem name={"Test 3"}></ContactItem>
-                <ContactItem name={"Test"}></ContactItem>
-                <ContactItem name={"Test 2"}></ContactItem>
-                <ContactItem name={"Test 3"}></ContactItem>
-                <ContactItem name={"Test"}></ContactItem>
-                <ContactItem name={"Test 2"}></ContactItem>
-                <ContactItem name={"Test 3"}></ContactItem>
-                <ContactItem name={"Test"}></ContactItem>
-                <ContactItem name={"Test 2"}></ContactItem>
-                <ContactItem name={"Test 3"}></ContactItem>
-                <ContactItem name={"Test"}></ContactItem>
-                <ContactItem name={"Test 2"}></ContactItem>
-                <ContactItem name={"Test 3"}></ContactItem>
+                <ContactItem name={"Test 4"}></ContactItem>
+                <ContactItem name={"Test 5"}></ContactItem>
+                <ContactItem name={"Test 6"}></ContactItem>
+                <ContactItem name={"Test 7"}></ContactItem>
+                <ContactItem name={"Test 8"}></ContactItem>
+                <ContactItem name={"Test 9"}></ContactItem>
+                <ContactItem name={"Test 10"}></ContactItem>
+                <ContactItem name={"Test 11"}></ContactItem>
+                <ContactItem name={"Test 12"}></ContactItem>
+                <ContactItem name={"Test 13"}></ContactItem>
+                <ContactItem name={"Test 14"}></ContactItem>
+                <ContactItem name={"Test 15"}></ContactItem>
             </ScrollView>
         </View>
     );
