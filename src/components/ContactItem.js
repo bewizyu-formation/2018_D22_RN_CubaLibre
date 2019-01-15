@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import {Text, View} from 'react-native';
+import {Text, View, TouchableHighlight} from 'react-native';
+import {ContactContext} from './ContactContext';
+
 
 
 export class ContactItem extends Component {
@@ -10,9 +12,20 @@ export class ContactItem extends Component {
 
     render() {
         return (
-            <View>
-                <Text>{this.props.name}</Text>
-            </View>
+            <ContactContext.Consumer>
+                {
+                    ({getContactDetail})=>{
+                        return (
+                            <TouchableHighlight onPress={() => getContactDetail(this.props.name)}>
+                                <View>
+                                    <Text>{this.props.name}</Text>
+                                </View>
+                            </TouchableHighlight> 
+                        )
+                    }
+                }
+            </ContactContext.Consumer>
+
         )
     }
 }
