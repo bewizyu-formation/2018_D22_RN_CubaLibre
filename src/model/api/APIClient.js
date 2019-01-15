@@ -1,70 +1,49 @@
+"use strict";
 
-
-import { storeJWT } from '../dataStorage/AStorage';
 import getContactList from './Contacts/GetContactList';
 import createContactFunc from './Contacts/CreateContact';
-import deleteContactFunc from './Contacts/DeleteContact';
-import updateContactFunc from './Contacts/UpdateContact';
 
+import getUsersFunc from './Users/GetUsers';
 import createUserFunc from './Users/CreateUser';
-
-const BASE_URL = 'https://familink-api.cleverapps.io/';
-const LOGIN_URI = 'public/login';
-const PROFILE_URI = 'public/profiles';
-const headers = {
-  Accept: 'application/json',
-  'Content-Type': 'application/json',
-};
+import updateUserFunc from './Users/UpdateUser';
+import getAuthenticatedUserFunc from './Users/getAuthenticatedUser';
+import getProfileFunc from './getProfiles';
+import loginFunc from './Users/login';
+import forgotPasswordFunc from './Users/forgotPassword'
 
 export function login(phone, password) {
-  const queryBody = {
-    phone,
-    password,
-  };
-
-  fetch(BASE_URL + LOGIN_URI, {
-    method: 'POST',
-    headers,
-    body: JSON.stringify(queryBody),
-  }).then(response => response.json())
-    .then((json) => {
-      const jwt = json.token;
-      storeJWT(jwt);
-    });
+    return loginFunc(phone, password);
 }
 
 export function getProfiles() {
-  return fetch(BASE_URL + PROFILE_URI, {
-    method: 'GET',
-    headers,
-  }).then(response => response.json())
-    .then((json) => {
-      if (json.message) {
-        console.error('error while getting profiles');
-        console.error(json.message);
-        return -1;
-      }
-      return json;
-    });
+    return getProfileFunc();
 }
 
 export function getContacts() {
-  return getContactList();
+    return getContactList();
+}
+
+export function forgotPassword(phone) {
+    return forgotPasswordFunc(phone);
 }
 
 export function createContact(contact) {
-  return createContactFunc(contact);
-}
-
-export function deleteContact() {
-  return deleteContactFunc();
-}
-
-export function updateContact() {
-  return updateContactFunc();
+    return createContactFunc(contact);
 }
 
 export function createUser(user, password, nbOfContacts) {
-  nbOfContacts = nbOfContacts || 20; // defaut value 20
-  return createUserFunc(user, password, nbOfContacts);
+    nbOfContacts = nbOfContacts || 20; // defaut value 20
+    return createUserFunc(user, password, nbOfContacts);
+}
+
+export function updateUser(user) {
+    return updateUserFunc(user);
+}
+
+export function getUsers() {
+    return getUsersFunc();
+}
+
+export function getAuthenticatedUser() {
+    return getAuthenticatedUserFunc();
 }
