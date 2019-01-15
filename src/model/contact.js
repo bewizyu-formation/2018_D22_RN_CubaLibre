@@ -1,15 +1,15 @@
 const contactStore = {
-    "phone": '',
-    "firstName": '',
-    "lastName": '',
-    "email": '',
-    "profile": '',
-    "gravatar" : '',
-    "isFamilinkUser" : false,
-    "isEmergencyUser": false
-}
+  phone: '',
+  firstName: '',
+  lastName: '',
+  email: '',
+  profile: '',
+  gravatar: '',
+  isFamilinkUser: false,
+  isEmergencyUser: false,
+};
 
 // clone contactStore object
 export default function getContactObject() {
-    return Object.assign({}, contactStore)
+  return Object.assign({}, contactStore);
 }

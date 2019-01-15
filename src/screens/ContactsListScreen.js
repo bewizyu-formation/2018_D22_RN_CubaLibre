@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
-import {Alert} from 'react-native';
-import {ContactsListContainer} from '../components/ContactsListContainer';
-import {ContactContext} from '../components/ContactContext';
+import { Alert } from 'react-native';
+import { ContactsListContainer } from '../components/ContactsListContainer';
+import { ContactContext } from '../components/ContactContext';
 
 export const CONTACTSLIST_SCENE_NAME = 'CONTACTSLIST_SCENE';
 
 export default class ContactsListScreen extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
 
     this.getContactDetail = (contact) => {
-      this.props.navigation.navigate('Details',{
-        contact: contact
-      })
-    }
+      this.props.navigation.navigate('Details', {
+        contact,
+      });
+    };
 
     this.state = {
-      getContactDetail : this.getContactDetail,
-      testFunction : this.testFunction
-    }
+      getContactDetail: this.getContactDetail,
+      testFunction: this.testFunction,
+    };
   }
 
   static navigationOptions = {
@@ -28,7 +28,7 @@ export default class ContactsListScreen extends Component {
   render() {
     return (
       <ContactContext.Provider value={this.state}>
-        <ContactsListContainer/>
+        <ContactsListContainer />
       </ContactContext.Provider>
     );
   }

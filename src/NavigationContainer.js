@@ -17,12 +17,12 @@ stackNavigatorConfig[CONTACTDETAIL_SCENE_NAME] = {
 const applicationNavigator = createStackNavigator(
   {
     Home: {
-      screen: ContactsListScreen
+      screen: ContactsListScreen,
     },
     Details: {
-      screen : ContactDetailScreen
-    }
-  }
+      screen: ContactDetailScreen,
+    },
+  },
 );
 
 export default createAppContainer(applicationNavigator);
