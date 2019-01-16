@@ -74,20 +74,20 @@ export default class ContactDetailContainer extends Component {
         <ScrollView>
           <View style={styles.imageContainer}>
             <Image style={styles.image} source={require('../../assets/contact.png')} />
-            <Text style={styles.name}>{this.state.contact}</Text>
+            <Text style={styles.name}>{`${this.state.contact.firstName} ${this.state.contact.lastName}`}</Text>
           </View>
           <View>
             <View style={styles.info}>
               <Image style={styles.icon} source={require('../../assets/phone.png')} />
-              <Text>XX.XX.XX.XX.XX</Text>
+              <Text>{this.state.contact.phone}</Text>
             </View>
             <View style={styles.info}>
               <Image style={styles.icon} source={require('../../assets/email.png')} />
-              <Text>nom.prenom@gmail.com</Text>
+              <Text>{this.state.contact.email}</Text>
             </View>
             <View style={styles.info}>
               <Image style={styles.icon} source={require('../../assets/profile.png')} />
-              <Text>profil</Text>
+              <Text>{this.state.contact.profile}</Text>
             </View>
           </View>
         </ScrollView>
@@ -103,6 +103,6 @@ export default class ContactDetailContainer extends Component {
   }
 }
 
-ContactDetailContainer.propTypes = {
-  contact: PropTypes.string.isRequired,
-};
+// ContactDetailContainer.propTypes = {
+//   contact: PropTypes.string.isRequired,
+// };

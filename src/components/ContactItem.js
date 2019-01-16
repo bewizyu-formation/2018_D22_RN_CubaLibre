@@ -44,16 +44,24 @@ const styles = StyleSheet.create({
 });
 
 export default class ContactItem extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      contact: this.props.contact,
+    };
+  }
+
   render() {
     return (
       <ContactContext.Consumer>
         {
                     ({ getContactDetail }) => (
-                      <TouchableHighlight onPress={() => getContactDetail(this.props.name)}>
+                      <TouchableHighlight onPress={() => getContactDetail(this.state.contact)}>
                         <View style={styles.item}>
 
                           <Image style={styles.images} source={require('../../assets/contact.png')} />
-                          <Text style={styles.name}>{this.props.name}</Text>
+                          <Text style={styles.name}>{`${this.state.contact.firstName} ${this.state.contact.lastName}`}</Text>
                         </View>
                       </TouchableHighlight>
                     )
@@ -64,6 +72,6 @@ export default class ContactItem extends Component {
   }
 }
 
-ContactItem.propTypes = {
-  name: PropTypes.string.isRequired,
-};
+// ContactItem.propTypes = {
+//   name: PropTypes.string.isRequired,
+// };

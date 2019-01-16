@@ -3,9 +3,9 @@ import { Provider } from 'react-redux';
 import { createLogger } from 'redux-logger';
 
 import React, { Component } from 'react';
+import thunk from 'redux-thunk';
 import NavigationContainer from './src/NavigationContainer';
 import { contactsReducer } from './src/redux/store/contacts.reducer';
-import ContactsListContainer from './src/components/ContactsListContainer';
 
 // Assemblage des différents reducers d'une application
 const reducers = combineReducers({
@@ -16,14 +16,9 @@ const logger = createLogger({
 });
 
 // Création du store
-const store = createStore(reducers, applyMiddleware(logger));
+const store = createStore(reducers, applyMiddleware(thunk, logger));
 
 export default class App extends Component {
-
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <Provider store={store}>
