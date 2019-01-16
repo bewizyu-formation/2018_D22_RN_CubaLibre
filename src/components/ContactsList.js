@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import { ScrollView, View } from 'react-native';
 import ContactItem from './ContactItem';
 
