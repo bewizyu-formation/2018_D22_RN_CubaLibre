@@ -1,30 +1,32 @@
 import React, { Component } from 'react';
 
 import { ScrollView, View } from 'react-native';
+import { connect } from 'react-redux';
+import { addContact } from '../redux/store/contacts.action';
 import ContactItem from './ContactItem';
 
-export default class ContactsList extends Component {
+export class ContactsList extends Component {
   render() {
     return (
       <View>
         <ScrollView>
-          <ContactItem name="Test 1" />
-          <ContactItem name="Test 2" />
-          <ContactItem name="Test 3" />
-          <ContactItem name="Test 4" />
-          <ContactItem name="Test 5" />
-          <ContactItem name="Test 6" />
-          <ContactItem name="Test 7" />
-          <ContactItem name="Test 8" />
-          <ContactItem name="Test 9" />
-          <ContactItem name="Test 10" />
-          <ContactItem name="Test 11" />
-          <ContactItem name="Test 12" />
-          <ContactItem name="Test 13" />
-          <ContactItem name="Test 14" />
-          <ContactItem name="Test 15" />
+          {
+            this.props.contacts.map(contact => <ContactItem key={contact.phone} name={`${contact.firstName} ${contact.lastName}`} />)
+          }
         </ScrollView>
       </View>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  contacts: state.contacts.list,
+});
+const mapDispatchToProps = dispatch => ({
+  addContact: (phone, firstName, lastName, email, isEmergencyUser, isFamilinkUser, profile, gravatar) => dispatch(addContact(phone, firstName, lastName, email, isEmergencyUser, isFamilinkUser, profile, gravatar))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ContactsList);

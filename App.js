@@ -4,7 +4,8 @@ import { createLogger } from 'redux-logger';
 
 import React, { Component } from 'react';
 import NavigationContainer from './src/NavigationContainer';
-import { contactsReducer } from './src/redux/store/contacts.reducer'
+import { contactsReducer } from './src/redux/store/contacts.reducer';
+import ContactsListContainer from './src/components/ContactsListContainer';
 
 // Assemblage des différents reducers d'une application
 const reducers = combineReducers({
