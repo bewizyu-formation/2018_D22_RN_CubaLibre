@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import { Alert } from 'react-native';
-import { ContactsListContainer } from '../components/ContactsListContainer';
+import PropTypes from 'prop-types';
+import ContactsListContainer from '../components/ContactsListContainer';
 import { ContactContext } from '../components/ContactContext';
 
 export const CONTACTSLIST_SCENE_NAME = 'CONTACTSLIST_SCENE';
 
 export default class ContactsListScreen extends Component {
+  static navigationOptions = {
+    title: 'List des contacts',
+  };
+
   constructor(props) {
     super(props);
 
@@ -17,13 +21,8 @@ export default class ContactsListScreen extends Component {
 
     this.state = {
       getContactDetail: this.getContactDetail,
-      testFunction: this.testFunction,
     };
   }
-
-  static navigationOptions = {
-    title: 'List des contacts',
-  };
 
   render() {
     return (
@@ -33,3 +32,9 @@ export default class ContactsListScreen extends Component {
     );
   }
 }
+
+ContactsListScreen.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};

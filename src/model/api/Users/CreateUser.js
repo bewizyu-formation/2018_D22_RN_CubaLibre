@@ -10,7 +10,7 @@ const headers = {
 
 export default async function createUser(user, password, nbOfContacts) {
   user.password = password;
-  return getJWT().then(jwt => fetch(`${BASE_URL}public/sign-in?contactsLength=${nbOfContacts}`, {
+  return getJWT().then(() => fetch(`${BASE_URL}public/sign-in?contactsLength=${nbOfContacts}`, {
     method: 'POST',
     headers,
     body: JSON.stringify(user),
