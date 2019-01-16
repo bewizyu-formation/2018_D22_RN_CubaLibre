@@ -1,8 +1,7 @@
-import React from 'react';
-// import { StackNavigator } from 'react-navigation';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 import ContactsListScreen, { CONTACTSLIST_SCENE_NAME } from './screens/ContactsListScreen';
+import ContactDetailScreen, { CONTACTDETAIL_SCENE_NAME } from './screens/ContactDetailScreen';
 
 import { ContactsList } from './components/ContactsList';
 
@@ -12,16 +11,19 @@ stackNavigatorConfig[CONTACTSLIST_SCENE_NAME] = {
   screen: ContactsListScreen,
 };
 
-// const ApplicationNavigator = StackNavigator(stackNavigatorConfig, {
-//   initialRouteName: CONTACTSLIST_SCENE_NAME,
-// });
+stackNavigatorConfig[CONTACTDETAIL_SCENE_NAME] = {
+  screen: ContactDetailScreen,
+};
+
 const applicationNavigator = createStackNavigator(
   {
     Home: {
-      screen: ContactsListScreen
-    }
-  }
+      screen: ContactsListScreen,
+    },
+    Details: {
+      screen: ContactDetailScreen,
+    },
+  },
 );
 
-// export default () => <ApplicationNavigator />;
 export default createAppContainer(applicationNavigator);

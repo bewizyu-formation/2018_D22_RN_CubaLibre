@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import {View} from 'react-native';
-import {ContactsList} from './ContactsList';
+import ContactsList from './ContactsList';
 
-export class ContactsListContainer extends Component {
-
+export default class ContactsListContainer extends Component {
   render() {
-    return (        
-        <ContactsList/>
+    return (
+      <ContactsList />
     );
   }
 }
