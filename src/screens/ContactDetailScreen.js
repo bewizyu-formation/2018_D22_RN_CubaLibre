@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ContactDetailContainer from '../components/ContactDetailContainer';
 
 export const CONTACTDETAIL_SCENE_NAME = 'CONTACTDETAIL_SCENE';
@@ -23,3 +24,9 @@ export default class ContactDetailScreen extends Component {
     );
   }
 }
+
+ContactDetailScreen.propTypes = {
+  navigation: PropTypes.shape({
+    getParam: PropTypes.func.isRequired,
+  }).isRequired,
+};

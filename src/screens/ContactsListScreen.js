@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ContactsListContainer from '../components/ContactsListContainer';
 import { ContactContext } from '../components/ContactContext';
 
@@ -31,3 +32,9 @@ export default class ContactsListScreen extends Component {
     );
   }
 }
+
+ContactsListScreen.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};

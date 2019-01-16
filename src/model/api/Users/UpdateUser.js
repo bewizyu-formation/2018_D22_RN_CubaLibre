@@ -9,7 +9,7 @@ const headers = {
   Authorization: '',
 };
 
-export default async function updateUser(user, password, nbOfContacts) {
+export default async function updateUser(user, password) {
   user.password = password;
   return getJWT().then((jwt) => {
     headers.Authorization = `Bearer: ${jwt}`;

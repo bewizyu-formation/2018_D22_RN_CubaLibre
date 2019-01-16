@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   Text, View, TouchableHighlight, Image, StyleSheet,
 } from 'react-native';
@@ -62,3 +63,7 @@ export default class ContactItem extends Component {
     );
   }
 }
+
+ContactItem.propTypes = {
+  name: PropTypes.string.isRequired,
+};
