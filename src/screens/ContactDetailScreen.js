@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
 
 export default class ContactDetailScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: navigation.getParam('contact', 'NO-CONTACT'),
     headerRight: (
       <TouchableHighlight onPress={() => Alert.alert('Supprimer')}>
         <Image style={styles.icon} source={require('../../assets/delete.png')} />

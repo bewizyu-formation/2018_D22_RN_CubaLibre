@@ -1,42 +1,25 @@
-import { ADD_CONTACT } from './contacts.action';
+import { ADD_CONTACT, LOAD_CONTACTS, CONTACTS_LOADED } from './contacts.action';
 
-export const initialContactsList = [
-  {
-    phone: '0710657376',
-    firstName: 'Florent',
-    lastName: 'Cerfon',
-    email: 'florent.cerfon@gmail.com',
-    isEmergencyUser: false,
-    isFamilinkUser: true,
-    profile: 'SENIOR',
-    gravatar: 'https://1.gravatar.com/avatar/aee4e2f2a433d1daa08bc3fdf3595134',
-  },
-  {
-    phone: '0685421230',
-    firstName: 'Amandine',
-    lastName: 'Richaudeau',
-    email: 'test@nomail.com',
-    isEmergencyUser: false,
-    isFamilinkUser: true,
-    profile: 'MEDECIN',
-    gravatar: '',
-  },
-  {
-    phone: '0785421236',
-    firstName: 'Kevin',
-    lastName: 'Richelieu',
-    email: 'nomail@nomail.com',
-    isEmergencyUser: false,
-    isFamilinkUser: true,
-    profile: 'FAMILLE',
-    gravatar: '',
-  },
-];
 export const initialState = {
-  list: initialContactsList,
+  list: [],
+  loading: false,
+  loaded: false,
 };
 export function contactsReducer(state = initialState, action) {
   switch (action.type) {
+    case LOAD_CONTACTS:
+      return {
+        ...state,
+        loading: true,
+        loaded: false,
+      };
+    case CONTACTS_LOADED:
+      return {
+        ...state,
+        list: action.contacts,
+        loading: false,
+        loaded: true,
+      };
     case ADD_CONTACT:
       const contact = {
         phone: action.phone,
