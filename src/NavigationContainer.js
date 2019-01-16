@@ -4,6 +4,8 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 import ContactsListScreen, { CONTACTSLIST_SCENE_NAME } from './screens/ContactsListScreen';
 
+import { ContactsList } from './components/ContactsList';
+
 const stackNavigatorConfig = {};
 
 stackNavigatorConfig[CONTACTSLIST_SCENE_NAME] = {
