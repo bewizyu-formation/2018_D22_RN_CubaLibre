@@ -1,12 +1,27 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import {
+  TouchableHighlight, Image, StyleSheet, Alert,
+} from 'react-native';
 import ContactDetailContainer from '../components/ContactDetailContainer';
 
 export const CONTACTDETAIL_SCENE_NAME = 'CONTACTDETAIL_SCENE';
 
+const styles = StyleSheet.create({
+  icon: {
+    height: 32,
+    width: 32,
+  },
+});
+
 export default class ContactDetailScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: navigation.getParam('contact', 'NO-CONTACT'),
+    headerRight: (
+      <TouchableHighlight onPress={() => Alert.alert('Supprimer')}>
+        <Image style={styles.icon} source={require('../../assets/delete.png')} />
+      </TouchableHighlight>
+    ),
   });
 
   constructor(props) {
