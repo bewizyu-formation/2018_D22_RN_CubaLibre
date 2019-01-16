@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import {ScrollView, View, StyleSheet } from 'react-native';
 import {ContactItem} from './ContactItem';
 
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types'
+import {addContact} from '../redux/store/contacts.action'; // Pour plus tard
+
 export class ContactsList extends Component {
 
   render() {
