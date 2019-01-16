@@ -13,7 +13,6 @@ const headers = {
 export default async function CreateContact(user) {
   return getJWT().then((jwt) => {
     headers.Authorization = `Bearer: ${jwt}`;
-    console.log(`sending ${JSON.stringify(user)}`);
     return fetch(BASE_URL + CONTACTS_URI, {
       method: 'POST',
       headers,
@@ -21,7 +20,6 @@ export default async function CreateContact(user) {
     }).then(response => response.json())
       .then((json) => {
         if (json.message) {
-          console.error(`error while creating contact : ${json.message}`);
           return json.message;
         }
         return json;

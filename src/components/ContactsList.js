@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { ScrollView, View, StyleSheet } from 'react-native';
-import { ContactItem } from './ContactItem';
+import { ScrollView, View } from 'react-native';
+import ContactItem from './ContactItem';
 
-export class ContactsList extends Component {
+export default class ContactsList extends Component {
   render() {
     return (
       <View>
@@ -27,9 +27,3 @@ export class ContactsList extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  listContainer: {
-    flex: 1,
-  },
-});

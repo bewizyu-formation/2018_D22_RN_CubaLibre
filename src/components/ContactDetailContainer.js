@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 
-export class ContactDetailContainer extends Component {
+export default class ContactDetailContainer extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      contact: this.props.contact,
+    };
+  }
+
   render() {
     return (
       <View>
-        <Text>{this.props.contact}</Text>
+        <Text>{this.state.contact}</Text>
       </View>
     );
   }

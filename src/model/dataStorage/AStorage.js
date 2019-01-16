@@ -15,6 +15,7 @@ async function retrieveData(key) {
     if (value !== null) {
       return value;
     }
+    return null;
   }).catch((error) => {
     console.error(`error while retrieving value of key ${key}`);
     console.error(error);
