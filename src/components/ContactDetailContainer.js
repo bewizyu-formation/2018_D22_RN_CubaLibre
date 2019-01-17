@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-  ScrollView, View, Text, Image, StyleSheet, Alert, TouchableOpacity, TextInput,
+  ScrollView, View, Text, Image, StyleSheet, Linking, TouchableOpacity, TextInput,
 } from 'react-native';
 
 const grey = '#F5FCFF';
+const black = '#000';
 const white = '#fff';
 const purple = '#841584';
+const yellow = '#f4e542';
 
 const styles = StyleSheet.create({
   container: {
@@ -32,6 +34,7 @@ const styles = StyleSheet.create({
   },
   info: {
     marginLeft: 24,
+    marginRight: 24,
     marginBottom: 16,
     flexDirection: 'row',
     alignItems: 'center',
@@ -40,23 +43,45 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     marginRight: 8,
+    marginLeft: 16,
   },
-  callButton: {
-    marginRight: 40,
-    marginLeft: 40,
-    marginTop: 10,
+  actionButton: {
+    flex: 1,
     paddingTop: 10,
     paddingBottom: 10,
-    backgroundColor: purple,
+    paddingLeft: 16,
+    backgroundColor: yellow,
     borderRadius: 10,
     borderWidth: 1,
     borderColor: white,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
-  callButtonText: {
-    color: white,
-    textAlign: 'center',
+  actionButtonText: {
     paddingLeft: 10,
     paddingRight: 10,
+  },
+  editButton: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: purple,
+    position: 'absolute',
+    bottom: 10,
+    right: 10,
+    justifyContent: 'center',
+  },
+  editActionButton: {
+    flex: 1,
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 16,
+    backgroundColor: white,
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: yellow,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
 
@@ -73,10 +98,18 @@ export default class ContactDetailContainer extends Component {
       isFamilinkUser: this.props.contact.isFamilinkUser,
       isEmergencyUser: this.props.contact.isEmergencyUser,
       gravatar: this.props.contact.gravatar,
-      edit: this.props.edit,
+      edit: false,
     };
 
-    this.callOrEditButton = this.callOrEditButton.bind(this);
+    this.changeEditStatus = this.changeEditStatus.bind(this);
+    this.callButton = this.callButton.bind(this);
+    this.emailButton = this.emailButton.bind(this);
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    return {
+      edit: state.edit,
+    };
   }
 
   handlePhoneChange(text) {
@@ -91,25 +124,58 @@ export default class ContactDetailContainer extends Component {
     });
   }
 
-  callOrEditButton() {
-    if (!this.props.edit) {
+  changeEditStatus() {
+    this.setState({
+      edit: !this.state.edit,
+    });
+  }
+
+  callButton() {
+    if (this.state.edit) {
       return (
         <TouchableOpacity
-          style={styles.callButton}
-          onPress={() => Alert.alert('Appel en cours...')}
+          style={styles.editActionButton}
           underlayColor="#fff"
         >
-          <Text style={styles.callButtonText}>Appeler</Text>
+          <Image style={styles.icon} source={require('../../assets/phone.png')} />
+          <TextInput value={this.state.phone} onChangeText={text => this.handlePhoneChange(text)} />
         </TouchableOpacity>
       );
     }
     return (
       <TouchableOpacity
-        style={styles.callButton}
-        onPress={() => Alert.alert('Contact modifié')}
+        style={styles.actionButton}
+        onPress={() => Linking.openURL(`${'tel://'}${this.state.phone}`)}
         underlayColor="#fff"
       >
-        <Text style={styles.callButtonText}>Enregister</Text>
+        <Image style={styles.icon} source={require('../../assets/phone.png')} />
+        <TextInput editable={false} style={styles.actionButtonText} value={this.state.phone} onChangeText={text => this.handlePhoneChange(text)} />
+        {/* <Text style={styles.actionButtonText}>{this.state.phone}</Text> */}
+      </TouchableOpacity>
+    );
+  }
+
+  emailButton() {
+    if (this.state.edit) {
+      return (
+        <TouchableOpacity
+          style={styles.editActionButton}
+          underlayColor="#fff"
+        >
+          <Image style={styles.icon} source={require('../../assets/email.png')} />
+          <TextInput value={this.state.email} onChangeText={text => this.handleEmailChange(text)} />
+        </TouchableOpacity>
+      );
+    }
+    return (
+      <TouchableOpacity
+        style={styles.actionButton}
+        onPress={() => Linking.openURL(`${'mailto:'}${this.state.email}`)}
+        underlayColor="#fff"
+      >
+        <Image style={styles.icon} source={require('../../assets/email.png')} />
+        <TextInput editable={false} style={styles.actionButtonText} value={this.state.email} onChangeText={text => this.handleEmailChange(text)} />
+        {/* <Text style={styles.actionButtonText}>{this.state.email}</Text> */}
       </TouchableOpacity>
     );
   }
@@ -127,29 +193,37 @@ export default class ContactDetailContainer extends Component {
           </View>
           <View>
             <View style={styles.info}>
-              <Image style={styles.icon} source={require('../../assets/phone.png')} />
-              {this.props.edit
-                ? <TextInput value={this.state.phone} onChangeText={text => this.handlePhoneChange(text)} />
-                : <Text>{this.state.phone}</Text>
-              }
+              {this.callButton()}
             </View>
             <View style={styles.info}>
-              <Image style={styles.icon} source={require('../../assets/email.png')} />
-              {this.props.edit
-                ? <TextInput value={this.state.email} onChangeText={text => this.handleEmailChange(text)} />
-                : <Text>{this.state.email}</Text>
-              }
+              {this.emailButton()}
             </View>
             <View style={styles.info}>
               <Image style={styles.icon} source={require('../../assets/profile.png')} />
-              {this.props.edit
+              {this.state.edit
                 ? <TextInput value={this.state.profile} />
                 : <Text>{this.state.profile}</Text>
               }
             </View>
           </View>
         </ScrollView>
-        {this.callOrEditButton()}
+        {/* <TouchableOpacity
+          style={styles.callButton}
+          onPress={() => this.changeEditStatus()}
+          underlayColor="#fff"
+        >
+          {this.state.edit
+            ? (<Text style={styles.actionButtonText}>Enregistrer</Text>)
+            : (<Text style={styles.actionButtonText}>Modifier</Text>)
+          }
+        </TouchableOpacity> */}
+        <TouchableOpacity
+          style={styles.editButton}
+          onPress={() => this.changeEditStatus()}
+          underlayColor="#fff"
+        >
+          <Image style={styles.icon} source={require('../../assets/edit.png')} />
+        </TouchableOpacity>
       </View>
     );
   }
@@ -166,5 +240,4 @@ ContactDetailContainer.propTypes = {
     isEmergencyUser: PropTypes.bool.isRequired,
     gravatar: PropTypes.string.isRequired,
   }).isRequired,
-  edit: PropTypes.bool.isRequired,
 };

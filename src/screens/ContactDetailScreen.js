@@ -15,14 +15,10 @@ const styles = StyleSheet.create({
 });
 
 export default class ContactDetailScreen extends Component {
-  static navigationOptions = ({ navigation }) => {
-    const { params = {} } = navigation.state;
+  static navigationOptions = () => {
     return {
       headerRight: (
         <>
-          <TouchableHighlight onPress={() => { params.handleThis(); }}>
-            <Image style={styles.icon} source={require('../../assets/edit.png')} />
-          </TouchableHighlight>
           <TouchableHighlight onPress={() => Alert.alert('Supprimer')}>
             <Image style={styles.icon} source={require('../../assets/delete.png')} />
           </TouchableHighlight>
@@ -36,27 +32,12 @@ export default class ContactDetailScreen extends Component {
 
     this.state = {
       contact: this.props.navigation.getParam('contact', 'NO-CONTACT'),
-      edit: false,
     };
-
-    this.changeEditStatus = this.changeEditStatus.bind(this);
-  }
-
-  componentDidMount() {
-    this.props.navigation.setParams({
-      handleThis: this.changeEditStatus,
-    });
-  }
-
-  changeEditStatus() {
-    this.setState({
-      edit: !this.state.edit,
-    });
   }
 
   render() {
     return (
-      <ContactDetailContainer edit={this.state.edit} contact={this.state.contact} />
+      <ContactDetailContainer contact={this.state.contact} />
     );
   }
 }
@@ -64,6 +45,5 @@ export default class ContactDetailScreen extends Component {
 ContactDetailScreen.propTypes = {
   navigation: PropTypes.shape({
     getParam: PropTypes.func.isRequired,
-    setParams: PropTypes.func.isRequired,
   }).isRequired,
 };
