@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-  ScrollView, View, Text, Image, StyleSheet, Linking, TouchableOpacity, TextInput,
+  ScrollView, View, Text, Image, StyleSheet, Linking, TouchableOpacity, TextInput, Picker,
 } from 'react-native';
 
 const grey = '#F5FCFF';
@@ -78,10 +78,14 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     backgroundColor: white,
     borderRadius: 10,
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: yellow,
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  profilePicker: {
+    height: 20,
+    width: '80%',
   },
 });
 
@@ -104,6 +108,7 @@ export default class ContactDetailContainer extends Component {
     this.changeEditStatus = this.changeEditStatus.bind(this);
     this.callButton = this.callButton.bind(this);
     this.emailButton = this.emailButton.bind(this);
+    this.profilePicker = this.profilePicker.bind(this);
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -121,6 +126,12 @@ export default class ContactDetailContainer extends Component {
   handleEmailChange(text) {
     this.setState({
       email: text,
+    });
+  }
+
+  handleProfileChange(text) {
+    this.setState({
+      profile: text,
     });
   }
 
@@ -150,7 +161,6 @@ export default class ContactDetailContainer extends Component {
       >
         <Image style={styles.icon} source={require('../../assets/phone.png')} />
         <TextInput editable={false} style={styles.actionButtonText} value={this.state.phone} onChangeText={text => this.handlePhoneChange(text)} />
-        {/* <Text style={styles.actionButtonText}>{this.state.phone}</Text> */}
       </TouchableOpacity>
     );
   }
@@ -175,8 +185,29 @@ export default class ContactDetailContainer extends Component {
       >
         <Image style={styles.icon} source={require('../../assets/email.png')} />
         <TextInput editable={false} style={styles.actionButtonText} value={this.state.email} onChangeText={text => this.handleEmailChange(text)} />
-        {/* <Text style={styles.actionButtonText}>{this.state.email}</Text> */}
       </TouchableOpacity>
+    );
+  }
+
+  profilePicker() {
+    if (this.state.edit) {
+      return (
+        <>
+          <Picker
+            selectedValue={this.state.profile}
+            // style={styles.profilePicker}
+            style={{width: 200, height: 44}} itemStyle={{height: 44}}
+            onValueChange={(itemValue, itemIndex) => this.setState({ profile: itemValue })}
+          >
+            <Picker.Item label="FAMILLE" value="FAMILLE" />
+            <Picker.Item label="AMI" value="AMI" />
+            <Picker.Item label="MEDECIN" value="MEDECIN" />
+          </Picker>
+        </>
+      );
+    }
+    return (
+      <Text>{this.state.profile}</Text>
     );
   }
 
@@ -200,23 +231,10 @@ export default class ContactDetailContainer extends Component {
             </View>
             <View style={styles.info}>
               <Image style={styles.icon} source={require('../../assets/profile.png')} />
-              {this.state.edit
-                ? <TextInput value={this.state.profile} />
-                : <Text>{this.state.profile}</Text>
-              }
+              {this.profilePicker()}
             </View>
           </View>
         </ScrollView>
-        {/* <TouchableOpacity
-          style={styles.callButton}
-          onPress={() => this.changeEditStatus()}
-          underlayColor="#fff"
-        >
-          {this.state.edit
-            ? (<Text style={styles.actionButtonText}>Enregistrer</Text>)
-            : (<Text style={styles.actionButtonText}>Modifier</Text>)
-          }
-        </TouchableOpacity> */}
         <TouchableOpacity
           style={styles.editButton}
           onPress={() => this.changeEditStatus()}
