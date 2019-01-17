@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import {Button, TextInput, View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
+
+import {
+  Button, TextInput, View, Text, Image, StyleSheet, TouchableOpacity
+} from 'react-native';
+
 
 export const CONNECTION_SCENE_NAME = 'CONNECTION_SCENE';
-
 
 const styles = StyleSheet.create({
     container: {
@@ -21,13 +24,17 @@ const styles = StyleSheet.create({
 });
 
 export default class ConnectionScreen extends Component {
-
     static navigationOptions = {
-        title: 'Connection',
-      };
+      title: 'Connection',
+    };
 
     constructor(props) {
-        super(props);
+      super(props);
+
+      this.state = {
+        login: '',
+        password: '',
+      };
 
         this.state = {login: '',
         password: ''
@@ -57,10 +64,9 @@ export default class ConnectionScreen extends Component {
         navigateToPasswordForgotten(){
             this.props.navigation.navigate('PasswordForgotten');
         }
-  
 
-render() {
-    return (
+    render() {
+      return (
         <View style={styles.container}>
             <Image
                 style={styles.images} source={require('../../assets/Logo.png')}>
