@@ -72,6 +72,15 @@ export default class ContactItem extends Component {
   }
 }
 
-// ContactItem.propTypes = {
-//   name: PropTypes.string.isRequired,
-// };
+ContactItem.propTypes = {
+  contact: PropTypes.shape({
+    phone: PropTypes.string.isRequired,
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    profile: PropTypes.string.isRequired,
+    isFamilinkUser: PropTypes.bool.isRequired,
+    isEmergencyUser: PropTypes.bool.isRequired,
+    gravatar: PropTypes.string.isRequired,
+  }).isRequired,
+};
