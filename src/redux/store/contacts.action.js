@@ -3,6 +3,7 @@ import { login, getContacts } from '../../model/api/APIClient';
 export const ADD_CONTACT = 'ADD_CONTACT';
 export const LOAD_CONTACTS = 'LOAD_CONTACTS';
 export const CONTACTS_LOADED = 'CONTACTS_LOADED';
+export const LOG_IN = 'LOG_IN';
 // export const DELETE_CONTACT = 'DELETE_CONTACT';
 
 export function addContact(phone, firstName, lastName, email,
@@ -21,11 +22,9 @@ export function addContact(phone, firstName, lastName, email,
 }
 
 const mockFetch = () => new Promise((resolve) => {
-  login('0600000002', '0000').then(() => {
     getContacts().then((contacts) => {
       resolve(contacts);
     });
-  });
 });
 
 export function contactsLoaded(contacts) {
@@ -41,4 +40,13 @@ export function loadContacts() {
     return mockFetch()
       .then(contacts => dispatch(contactsLoaded(contacts)));
   };
+}
+
+export function logIn(phone, password, callback) {
+  return (dispatch) => {
+    dispatch({type: LOG_IN});
+    return login(phone, password).then((errorMessage) => {
+      callback(errorMessage)
+    })
+  }
 }

@@ -6,6 +6,8 @@ import ConnectionScreen, { CONNECTION_SCENE_NAME } from './screens/ConnectionScr
 import SignUpScreen, {SIGN_UP_SCENE_NAME} from './screens/SignUpScreen';
 import PasswordForgottenScreen, {PASSWORD_FORGOTTEN_SCENE_NAME} from './screens/PasswordForgottenScreen';
 
+import { getJWT } from './model/dataStorage/AStorage';
+
 const stackNavigatorConfig = {};
 
 stackNavigatorConfig[CONNECTION_SCENE_NAME] = {
@@ -28,9 +30,17 @@ stackNavigatorConfig[CONTACTDETAIL_SCENE_NAME] = {
   screen: ContactDetailScreen,
 };
 
+let homeScreen = ConnectionScreen;
+if (getJWT()) {
+  homeScreen = ContactsListScreen;
+}
+
 const applicationNavigator = createStackNavigator(
   {
     Home: {
+      screen: homeScreen
+    },
+    Connection: {
       screen: ConnectionScreen
     },
     SignUp: {

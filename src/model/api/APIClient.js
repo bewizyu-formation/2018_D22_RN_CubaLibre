@@ -1,5 +1,3 @@
-
-
 import getContactList from './Contacts/GetContactList';
 import createContactFunc from './Contacts/CreateContact';
 
@@ -11,39 +9,56 @@ import getProfileFunc from './getProfiles';
 import loginFunc from './Users/login';
 import forgotPasswordFunc from './Users/forgotPassword';
 
+import NavigationService from '../../NavigationService';
+
+const EXPIRED_JWT = 'EXPIRED_JWT'
+
+function manageExpiredJwt(responseApi) {
+  let answer = responseApi.then(response => {
+    if (response.status == 401) {
+      NavigationService.navigate('Connection', { reason : EXPIRED_JWT } );
+    }
+    return response.json();
+  });
+  return answer.then(json => {
+    return json;
+  }).catch((error) => {
+  });
+}
+
 export function login(phone, password) {
   return loginFunc(phone, password);
 }
 
 export function getProfiles() {
-  return getProfileFunc();
+  return manageExpiredJwt(getProfileFunc());
 }
 
 export function getContacts() {
-  return getContactList();
+  return manageExpiredJwt(getContactList());
 }
 
 export function forgotPassword(phone) {
-  return forgotPasswordFunc(phone);
+  return manageExpiredJwt(forgotPasswordFunc(phone));
 }
 
 export function createContact(contact) {
-  return createContactFunc(contact);
+  return manageExpiredJwt(createContactFunc(contact));
 }
 
 export function createUser(user, password, nbOfContacts) {
   nbOfContacts = nbOfContacts || 20; // defaut value 20
-  return createUserFunc(user, password, nbOfContacts);
+  return manageExpiredJwt(createUserFunc(user, password, nbOfContacts));
 }
 
 export function updateUser(user) {
-  return updateUserFunc(user);
+  return manageExpiredJwt(updateUserFunc(user));
 }
 
 export function getUsers() {
-  return getUsersFunc();
+  return manageExpiredJwt(getUsersFunc());
 }
 
 export function getAuthenticatedUser() {
-  return getAuthenticatedUserFunc();
+  return manageExpiredJwt(getAuthenticatedUserFunc());
 }
