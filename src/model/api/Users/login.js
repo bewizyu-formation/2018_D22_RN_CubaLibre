@@ -19,6 +19,9 @@ export default function login(phone, password) {
     body: JSON.stringify(queryBody),
   }).then(response => response.json())
     .then((json) => {
+      if (json.message) {
+        return json.message;
+      }
       const jwt = json.token;
       storeJWT(jwt);
     });
