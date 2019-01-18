@@ -57,7 +57,7 @@ export default class ContactItem extends Component {
       <ContactContext.Consumer>
         {
                     ({ getContactDetail }) => (
-                      <TouchableHighlight onPress={() => getContactDetail(this.state.contact)}>
+                      <TouchableHighlight onPress={() => getContactDetail(this.state.contact, this.props.callBack)}>
                         <View style={styles.item}>
 
                           <Image style={styles.images} source={require('../../assets/contact.png')} />

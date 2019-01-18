@@ -3,25 +3,41 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Text, View, FlatList } from 'react-native';
 import { connect } from 'react-redux';
-import { loadContacts } from '../redux/store/contacts.action';
+import { loadContacts, updateContact } from '../redux/store/contacts.action';
 import ContactItem from './ContactItem';
 
 class ContactsList extends Component {
-  componentDidMount() {
-    this.props.loadContacts();
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      contacts: [],
+    };
+
+    this.updateContact = this.updateContact.bind(this);
   }
 
-  keyExtractor = (item, index) => item.phone; // eslint-disable-line no-unused-vars
+  componentDidMount() {
+    this.props.loadContacts().then((contacts) => {
+      this.setState(contacts);
+    });
+  }
+
+  keyExtractor = (item, index) => `${item.firstName}${item.lastName}${item.phone}${item.email}${item.profile}`; // eslint-disable-line no-unused-vars
 
   renderItem = ({ item }) => (
-    <ContactItem contact={item} key={item.phone} />
+    <ContactItem contact={item} key={item.phone} callBack={this.updateContact} />
   )
+
+  updateContact(contact) {
+    this.props.updateContact(contact);
+  }
 
   displayContacts() {
     if (this.props.loading) {
       return <Text>Loading ....</Text>;
     }
-
+    console.log(this.props.contacts);
     return (
       <View>
         <FlatList
@@ -48,6 +64,7 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = dispatch => ({
   loadContacts: () => dispatch(loadContacts()),
+  updateContact: contact => dispatch(updateContact(contact)),
   // addContact: (phone, firstName, lastName, email, isEmergencyUser, isFamilinkUser,
   // profile, gravatar) => dispatch(addContact(phone, firstName, lastName, email,
   // isEmergencyUser, isFamilinkUser, profile, gravatar)),
@@ -61,6 +78,7 @@ export default connect(
 
 ContactsList.propTypes = {
   loadContacts: PropTypes.func.isRequired,
+  updateContact: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   contacts: PropTypes.arrayOf(
     PropTypes.shape({

@@ -1,6 +1,7 @@
 import { login, getContacts } from '../../model/api/APIClient';
 
 export const ADD_CONTACT = 'ADD_CONTACT';
+export const UPDATE_CONTACT = 'UPDATE_CONTACT';
 export const LOAD_CONTACTS = 'LOAD_CONTACTS';
 export const CONTACTS_LOADED = 'CONTACTS_LOADED';
 export const LOG_IN = 'LOG_IN';
@@ -21,10 +22,17 @@ export function addContact(phone, firstName, lastName, email,
   };
 }
 
+export function updateContact(contact) {
+  return {
+    type: UPDATE_CONTACT,
+    contact,
+  };
+}
+
 const mockFetch = () => new Promise((resolve) => {
-    getContacts().then((contacts) => {
-      resolve(contacts);
-    });
+  getContacts().then((contacts) => {
+    resolve(contacts);
+  });
 });
 
 export function contactsLoaded(contacts) {
@@ -44,9 +52,9 @@ export function loadContacts() {
 
 export function logIn(phone, password, callback) {
   return (dispatch) => {
-    dispatch({type: LOG_IN});
+    dispatch({ type: LOG_IN });
     return login(phone, password).then((errorMessage) => {
-      callback(errorMessage)
-    })
-  }
+      callback(errorMessage);
+    });
+  };
 }

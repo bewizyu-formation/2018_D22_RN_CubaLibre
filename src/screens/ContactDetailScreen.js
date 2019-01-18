@@ -15,30 +15,29 @@ const styles = StyleSheet.create({
 });
 
 export default class ContactDetailScreen extends Component {
-  static navigationOptions = () => {
-    return {
-      headerRight: (
-        <>
-          <TouchableHighlight onPress={() => Alert.alert('Supprimer')}>
-            <Image style={styles.icon} source={require('../../assets/delete.png')} />
-          </TouchableHighlight>
-        </>
-      ),
-    };
-  };
+  static navigationOptions = () => ({
+    headerRight: (
+      <>
+        <TouchableHighlight onPress={() => Alert.alert('Supprimer')}>
+          <Image style={styles.icon} source={require('../../assets/delete.png')} />
+        </TouchableHighlight>
+      </>
+    ),
+  });
 
   constructor(props) {
     super(props);
 
     this.state = {
       contact: this.props.navigation.getParam('contact', 'NO-CONTACT'),
+      callBack: this.props.navigation.getParam('callBack', 'NO-CALLBACK'),
       edit: this.props.navigation.getParam('edit', false),
     };
   }
 
   render() {
     return (
-      <ContactDetailContainer contact={this.state.contact} edit={this.state.edit} />
+      <ContactDetailContainer contact={this.state.contact} edit={this.state.edit} callBack={this.state.callBack} />
     );
   }
 }

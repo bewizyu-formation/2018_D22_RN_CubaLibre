@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import {
   ScrollView, View, Text, Image, StyleSheet, Linking, TouchableOpacity, TextInput, Picker,
 } from 'react-native';
+import { connect } from 'react-redux';
+import { updateContact } from '../redux/store/contacts.action';
 import { Colors } from '../Colors';
 
 const styles = StyleSheet.create({
@@ -112,7 +114,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class ContactDetailContainer extends Component {
+export class ContactDetailContainer extends Component {
   constructor(props) {
     super(props);
 
@@ -125,6 +127,7 @@ export default class ContactDetailContainer extends Component {
       isFamilinkUser: this.props.contact.isFamilinkUser,
       isEmergencyUser: this.props.contact.isEmergencyUser,
       gravatar: this.props.contact.gravatar,
+      id: this.props.contact._id,
       edit: this.props.edit,
     };
 
@@ -177,6 +180,21 @@ export default class ContactDetailContainer extends Component {
   }
 
   changeEditStatus() {
+    if (this.state.edit) {
+      const contact = {
+        phone: this.state.phone,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.email,
+        profile: this.state.profile,
+        isFamilinkUser: this.state.isFamilinkUser,
+        isEmergencyUser: this.state.isEmergencyUser,
+        gravatar: this.state.gravatar,
+        _id: this.state.id,
+      };
+      this.props.callBack(contact);
+    }
+
     this.setState({
       edit: !this.state.edit,
     });
@@ -302,6 +320,17 @@ export default class ContactDetailContainer extends Component {
   }
 }
 
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = dispatch => ({
+  updateContact: contact => dispatch(updateContact(contact)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ContactDetailContainer);
+
 ContactDetailContainer.propTypes = {
   contact: PropTypes.shape({
     phone: PropTypes.string.isRequired,
@@ -311,7 +340,9 @@ ContactDetailContainer.propTypes = {
     profile: PropTypes.string.isRequired,
     isFamilinkUser: PropTypes.bool.isRequired,
     isEmergencyUser: PropTypes.bool.isRequired,
+    _id: PropTypes.string.isRequired,
     gravatar: PropTypes.string.isRequired,
   }).isRequired,
   edit: PropTypes.bool.isRequired,
+  updateContact: PropTypes.func.isRequired,
 };
