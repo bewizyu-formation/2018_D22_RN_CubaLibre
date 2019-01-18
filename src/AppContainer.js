@@ -30,21 +30,21 @@ stackNavigatorConfig[CONTACTDETAIL_SCENE_NAME] = {
   screen: ContactDetailScreen,
 };
 
-let homeScreen = ConnectionScreen;
+/* let homeScreen = ConnectionScreen;
 if (getJWT()) {
   homeScreen = ContactsListScreen;
-}
+} */
 
 const applicationNavigator = createStackNavigator(
   {
     Home: {
-      screen: homeScreen
+      screen: ContactsListScreen,
     },
     Connection: {
-      screen: ConnectionScreen
+      screen: ConnectionScreen,
     },
     SignUp: {
-      screen: SignUpScreen
+      screen: SignUpScreen,
     },
     PasswordForgotten: {
       screen: PasswordForgottenScreen,
