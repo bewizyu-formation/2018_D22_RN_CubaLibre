@@ -3,8 +3,9 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 import ContactsListScreen, { CONTACTSLIST_SCENE_NAME } from './screens/ContactsListScreen';
 import ContactDetailScreen, { CONTACTDETAIL_SCENE_NAME } from './screens/ContactDetailScreen';
 import ConnectionScreen, { CONNECTION_SCENE_NAME } from './screens/ConnectionScreen';
-import SignUpScreen, {SIGN_UP_SCENE_NAME} from './screens/SignUpScreen';
-import PasswordForgottenScreen, {PASSWORD_FORGOTTEN_SCENE_NAME} from './screens/PasswordForgottenScreen';
+import SignUpScreen, { SIGN_UP_SCENE_NAME } from './screens/SignUpScreen';
+import PasswordForgottenScreen, { PASSWORD_FORGOTTEN_SCENE_NAME } from './screens/PasswordForgottenScreen';
+import LoadingScreen, { LOADING_SCENE_NAME } from './screens/LoadingScreen';
 
 import { getJWT } from './model/dataStorage/AStorage';
 
@@ -30,21 +31,20 @@ stackNavigatorConfig[CONTACTDETAIL_SCENE_NAME] = {
   screen: ContactDetailScreen,
 };
 
-let homeScreen = ConnectionScreen;
-if (getJWT()) {
-  homeScreen = ContactsListScreen;
-}
+stackNavigatorConfig[LOADING_SCENE_NAME] = {
+  screen: LoadingScreen,
+};
 
 const applicationNavigator = createStackNavigator(
   {
     Home: {
-      screen: homeScreen
+      screen: LoadingScreen,
     },
     Connection: {
-      screen: ConnectionScreen
+      screen: ConnectionScreen,
     },
     SignUp: {
-      screen: SignUpScreen
+      screen: SignUpScreen,
     },
     PasswordForgotten: {
       screen: PasswordForgottenScreen,

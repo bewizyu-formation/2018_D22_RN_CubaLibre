@@ -16,6 +16,6 @@ export default async function getContactList() {
     return fetch(BASE_URL + CONTACTS_URI, {
       method: 'GET',
       headers,
-    })
+    });
   });
 }

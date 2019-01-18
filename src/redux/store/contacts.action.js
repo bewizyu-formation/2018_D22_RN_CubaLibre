@@ -22,9 +22,9 @@ export function addContact(phone, firstName, lastName, email,
 }
 
 const mockFetch = () => new Promise((resolve) => {
-    getContacts().then((contacts) => {
-      resolve(contacts);
-    });
+  getContacts().then((contacts) => {
+    resolve(contacts);
+  });
 });
 
 export function contactsLoaded(contacts) {
@@ -44,9 +44,9 @@ export function loadContacts() {
 
 export function logIn(phone, password, callback) {
   return (dispatch) => {
-    dispatch({type: LOG_IN});
+    dispatch({ type: LOG_IN });
     return login(phone, password).then((errorMessage) => {
-      callback(errorMessage)
-    })
-  }
+      callback(errorMessage);
+    });
+  };
 }

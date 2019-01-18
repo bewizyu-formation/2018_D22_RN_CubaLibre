@@ -11,18 +11,16 @@ import forgotPasswordFunc from './Users/forgotPassword';
 
 import NavigationService from '../../NavigationService';
 
-const EXPIRED_JWT = 'EXPIRED_JWT'
+const EXPIRED_JWT = 'EXPIRED_JWT';
 
 function manageExpiredJwt(responseApi) {
-  let answer = responseApi.then(response => {
+  const answer = responseApi.then((response) => {
     if (response.status == 401) {
-      NavigationService.navigate('Connection', { reason : EXPIRED_JWT } );
+      NavigationService.navigate('Connection', { reason: EXPIRED_JWT });
     }
     return response.json();
   });
-  return answer.then(json => {
-    return json;
-  }).catch((error) => {
+  return answer.then(json => json).catch((error) => {
   });
 }
 

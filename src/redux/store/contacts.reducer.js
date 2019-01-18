@@ -1,4 +1,6 @@
-import { ADD_CONTACT, LOAD_CONTACTS, CONTACTS_LOADED, LOG_IN } from './contacts.action';
+import {
+  ADD_CONTACT, LOAD_CONTACTS, CONTACTS_LOADED, LOG_IN,
+} from './contacts.action';
 
 export const initialState = {
   list: [],
@@ -38,7 +40,7 @@ export function contactsReducer(state = initialState, action) {
     case LOG_IN:
       return {
         ...state,
-      }
+      };
     default:
       return state;
   }
