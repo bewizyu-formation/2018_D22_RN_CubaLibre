@@ -56,10 +56,10 @@ export function addContact(phone, firstName, lastName, email,
 }
 
 const mockFetch = () => new Promise((resolve) => {
-  resolve(mockedContacts);
-  /*getContacts().then((contacts) => {
+  // resolve(mockedContacts);
+  getContacts().then((contacts) => {
     resolve(contacts);
-  });*/
+  });
 });
 
 const profilesFetch = () => new Promise((resolve) => {

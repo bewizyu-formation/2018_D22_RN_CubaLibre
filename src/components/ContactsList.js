@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     fontSize: 19,
     paddingLeft: 15,
     paddingRight: 15,
-    height: 28,
+    height: 43,
     borderBottomWidth: 0.5,
   },
   container: {
@@ -82,6 +82,29 @@ class ContactsList extends Component {
     this.setState({ contacts });
   }
 
+  displayActivatedProfileButton(name, profile, key) {
+    return (
+      <Button key={key}
+        style={styles.button}
+        color='#00008b'
+        title={name} onPress={() => this.filterByType(profile)}>
+      </Button>
+    )
+  }
+
+  displayStandardProfileButton(name, profile, key) {
+    return (
+      <Button key={key}
+        style={styles.button}
+        title={name} onPress={() => this.filterByType(profile)}>
+      </Button>
+    )
+  }
+
+  lowercaseAndCapitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+  }
+
   displayContacts() {
     if (this.props.loading) {
       return <Text>Loading ....</Text>;
@@ -96,20 +119,17 @@ class ContactsList extends Component {
             keyExtractor={this.keyExtractor}
           >
             <View style={styles.container}>
-              <Button
-                style={styles.button}
-                color={this.state.selectedProfile == '' ? '#00008b' : ''}
-                title="Tous les contacts" onPress={() => this.filterByType('')}>
-              </Button>
+              {
+                this.state.selectedProfile == '' ?
+                  this.displayActivatedProfileButton('Tous les contacts', '') :
+                  this.displayStandardProfileButton('Tous les contacts', '')
+              }
               {
                 this.props.profiles.map((profile, index) => {
-                  return (
-                    <Button key={index}
-                      style={styles.button}
-                      color={this.state.selectedProfile == profile ? '#00008b' : ''}
-                      title={profile.toLowerCase()} onPress={() => this.filterByType(profile)}>
-                    </Button>
-                  )
+                  const button = this.state.selectedProfile == profile ?
+                    this.displayActivatedProfileButton(this.lowercaseAndCapitalizeFirstLetter(profile), profile, index) :
+                    this.displayStandardProfileButton(this.lowercaseAndCapitalizeFirstLetter(profile), profile, index)
+                    return button;
                 })
               }
             </View>
