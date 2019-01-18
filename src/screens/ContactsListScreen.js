@@ -16,6 +16,7 @@ export default class ContactsListScreen extends Component {
     this.getContactDetail = (contact) => {
       this.props.navigation.navigate('Details', {
         contact,
+        edit: false,
       });
     };
 

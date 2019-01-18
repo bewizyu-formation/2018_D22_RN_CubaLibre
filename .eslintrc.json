@@ -19,6 +19,7 @@
         "react-native"
     ],
     "rules": {
+        "max-len": 0,
         "no-case-declarations": 0,
         "global-require": 0,
         "import/prefer-default-export": 0,
