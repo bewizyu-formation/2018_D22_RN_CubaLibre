@@ -14,13 +14,20 @@ import NavigationService from '../../NavigationService';
 const EXPIRED_JWT = 'EXPIRED_JWT';
 
 function manageExpiredJwt(responseApi) {
+  console.log('je passe');
+  console.log(responseApi);
   const answer = responseApi.then((response) => {
+    console.log('test');
+    console.log(response);
     if (response.status == 401) {
       NavigationService.navigate('Connection', { reason: EXPIRED_JWT });
     }
     return response.json();
   });
-  return answer.then(json => json).catch((error) => {
+  return answer.then((json) => {
+    console.log('poire');
+    console.log(json);
+    return json;
   });
 }
 

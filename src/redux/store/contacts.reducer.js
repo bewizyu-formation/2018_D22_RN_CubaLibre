@@ -1,5 +1,5 @@
 import {
-  ADD_CONTACT, UPDATE_CONTACT, LOAD_CONTACTS, CONTACTS_LOADED, LOG_IN, LOAD_PROFILES, PROFILES_LOADED,
+  ADD_CONTACT, UPDATE_CONTACT, LOAD_CONTACTS, CONTACTS_LOADED, LOG_IN, LOAD_PROFILES, PROFILES_LOADED, ADD_USER
 } from './contacts.action';
 
 export const initialState = {
@@ -76,7 +76,11 @@ export function contactsReducer(state = initialState, action) {
     case LOG_IN:
       return {
         ...state,
-      };
+      }
+    case ADD_USER:
+      return {
+        ...state,
+      }
     default:
       return state;
   }
