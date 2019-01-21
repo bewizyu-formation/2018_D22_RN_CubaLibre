@@ -10,19 +10,9 @@ const headers = {
 
 export default async function createUser(user, password, nbOfContacts) {
   user.password = password;
-  return getJWT().then(() => fetch(`${BASE_URL}public/sign-in?contactsLength=${nbOfContacts}`, {
-    method: 'POST',
-    headers,
-    body: JSON.stringify(user),
-  }).then(response => response.json())
-    .then((json) => {
-      if (json.message) {
-        console.error(`error at user creation : ${json.message}`);
-        return -1;
-      }
-      return json;
-    })
-    .catch((error) => {
-      console.error(error);
-    }));
+  return fetch(`${BASE_URL}public/sign-in?contactsLength=${nbOfContacts}`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(user),
+  });
 }

@@ -1,9 +1,10 @@
-import { login, getContacts } from '../../model/api/APIClient';
+import { login, getContacts, createUser } from '../../model/api/APIClient';
 
 export const ADD_CONTACT = 'ADD_CONTACT';
 export const LOAD_CONTACTS = 'LOAD_CONTACTS';
 export const CONTACTS_LOADED = 'CONTACTS_LOADED';
 export const LOG_IN = 'LOG_IN';
+export const ADD_USER = 'ADD_USER';
 // export const DELETE_CONTACT = 'DELETE_CONTACT';
 
 export function addContact(phone, firstName, lastName, email,
@@ -46,6 +47,25 @@ export function logIn(phone, password, callback) {
   return (dispatch) => {
     dispatch({type: LOG_IN});
     return login(phone, password).then((errorMessage) => {
+      callback(errorMessage)
+    })
+  }
+}
+
+export function addUser(phone, password, firstName, lastName, email, profile, callback){
+  // return {
+  //   type: ADD_USER,
+  //   phone,
+  //   password,
+  //   firstName,
+  //   lastName,
+  //   email,
+  //   profile,
+  // };
+  const user = {phone, firstName, lastName, email, profile}
+  return (dispatch) => {
+    dispatch({type: ADD_USER});
+    return createUser(user, password, 0).then((errorMessage) => {
       callback(errorMessage)
     })
   }

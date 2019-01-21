@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, StyleSheet, TouchableOpacity, TextInput, Picker } from 'react-native';
+import { connect } from 'react-redux';
+import {addUser} from '../redux/store/contacts.action';
 
 export const SIGN_UP_SCENE_NAME = 'SIGN_UP_SCENE';
 
@@ -43,7 +45,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default class SignUpScreen extends Component {
+export class SignUpScreen extends Component {
 
     static navigationOptions = {
         title: 'SignUp',
@@ -57,7 +59,7 @@ export default class SignUpScreen extends Component {
             firstname: '',
             lastname: '',
             password: '',
-            profileType: '',
+            profile: 'SENIOR',
             email: '',
             showErrorPhone: false,
             showErrorFirstname: false,
@@ -93,25 +95,39 @@ export default class SignUpScreen extends Component {
         this.setState({showErrorMail: false})
 
 
+        let error = false;
+
         if (!this.validatePhone(this.state.phone)) {
-            this.setState({showErrorPhone: true}) 
-            if (this.state.firstname === ''){
+            this.setState({showErrorPhone: true})
+            error = true
+        }
+        if (this.state.firstname === ''){
             this.setState({showErrorFirstname: true})
-            }
-            if (this.state.lastname === ''){
+            error = true
+        }
+        if (this.state.lastname === ''){
             this.setState({showErrorLastname: true})
-            }
-            if (!this.validatePassword(this.state.password)) {
+            error = true
+        }
+        if (!this.validatePassword(this.state.password)) {
             this.setState({showErrorPassword: true})
-            } 
-            if (!this.validateEmail(this.state.email)) {
+            error = true
+        } 
+        if (!this.validateEmail(this.state.email)) {
             this.setState({showErrorMail: true })
-            }
-        } else {
-            this.props.navigation.navigate('ContactsList');
+            error = true
+        }
+        if (error === false) {
+            this.props.addUser(this.state.phone, this.state.password, this.state.firstname, this.state.lastname, this.state.email, this.state.profile, (errorMessage) => {
+                if (errorMessage) {
+                    alert(errorMessage)
+                } else {
+                    alert('ok :)')
+                //this.props.navigation.navigate('ContactsList');
+                }
+            });
         }
     }
-
     render() {
         let phoneMessage = undefined;
         let firstnameMessage = undefined;
@@ -175,11 +191,11 @@ export default class SignUpScreen extends Component {
 
                 <Text style={styles.textTitle}>PROFIL</Text>
                 <Picker
-                    selectedValue={this.state.profileType}
-                    onValueChange={(profileType) => this.setState({ profileType })}>
-                    <Picker.Item label="Amis" value="Amis" />
-                    <Picker.Item label="Famille" value="Famille" />
-                    <Picker.Item label="Médecin" value="Médecin" />
+                    selectedValue={this.state.profile}
+                    onValueChange={(profile) => this.setState({ profile })}>
+                    <Picker.Item label="Senior" value="SENIOR" />
+                    <Picker.Item label="Famille" value="FAMILLE" />
+                    <Picker.Item label="Médecin" value="MEDECIN" />
                 </Picker>
 
                 <Text style={styles.textTitle}>E MAIL</Text>
@@ -201,3 +217,14 @@ export default class SignUpScreen extends Component {
     }
 }
 
+const mapStateToProps = state => ({
+
+});
+const mapDispatchToProps = dispatch => ({
+    addUser: (phone, password, firstName, lastName, email, profile, callback) => dispatch(addUser(phone, password, firstName, lastName, email, profile, callback)),
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(SignUpScreen);
