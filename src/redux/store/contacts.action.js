@@ -41,18 +41,10 @@ const mockedContacts = [
   },
 ];
 
-export function addContact(phone, firstName, lastName, email,
-  isEmergencyUser, isFamilinkUser, profile, gravatar) {
+export function addContact(contact) {
   return {
     type: ADD_CONTACT,
-    phone,
-    firstName,
-    lastName,
-    email,
-    isEmergencyUser,
-    isFamilinkUser,
-    profile,
-    gravatar,
+    contact,
   };
 }
 

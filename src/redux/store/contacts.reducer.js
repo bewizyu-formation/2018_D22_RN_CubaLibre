@@ -10,8 +10,6 @@ export const initialState = {
   loaded: false,
 };
 export function contactsReducer(state = initialState, action) {
-  console.log('toto');
-  console.log(action);
   switch (action.type) {
     case LOAD_CONTACTS:
       return {
@@ -28,18 +26,18 @@ export function contactsReducer(state = initialState, action) {
       };
     case ADD_CONTACT:
       const newContact = {
-        phone: action.phone,
-        firstName: action.firstName,
-        lastName: action.lastName,
-        email: action.email,
-        isEmergencyUser: action.isEmergencyUser,
-        isFamilinkUser: action.isFamilinkUser,
-        profile: action.profile,
-        gravatar: action.gravatar,
+        phone: action.contact.phone,
+        firstName: action.contact.firstName,
+        lastName: action.contact.lastName,
+        email: action.contact.email,
+        isEmergencyUser: action.contact.isEmergencyUser,
+        isFamilinkUser: action.contact.isFamilinkUser,
+        profile: action.contact.profile,
+        gravatar: action.contact.gravatar,
       };
       return {
         ...state,
-        list: [...state.list, newContact],
+        list: [newContact, ...state.list],
       };
     case UPDATE_CONTACT:
       return {
@@ -55,7 +53,6 @@ export function contactsReducer(state = initialState, action) {
               isFamilinkUser: action.contact.isFamilinkUser,
               profile: action.contact.profile,
               gravatar: action.contact.gravatar,
-              update: 0,
               _id: action.contact._id,
             };
           }

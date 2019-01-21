@@ -29,15 +29,37 @@ export default class ContactDetailScreen extends Component {
     super(props);
 
     this.state = {
-      contact: this.props.navigation.getParam('contact', 'NO-CONTACT'),
-      callBack: this.props.navigation.getParam('callBack', 'NO-CALLBACK'),
+      contact: this.props.navigation.getParam('contact', null),
       edit: this.props.navigation.getParam('edit', false),
+      newContact: false,
     };
+
+    if(this.state.contact === null){
+      const newContact = {
+        phone: '',
+        firstName: '',
+        lastName: '',
+        email: '',
+        profile: 'FAMILLE',
+        isFamilinkUser: '',
+        isEmergencyUser: '',
+        gravatar: null,
+      };
+
+      this.state = {
+        contact: newContact,
+        edit: true,
+        newContact: true,
+      };
+    }
+
+    console.log('state 2');
+    console.log(this.state.contact);
   }
 
   render() {
     return (
-      <ContactDetailContainer contact={this.state.contact} edit={this.state.edit} callBack={this.state.callBack} />
+      <ContactDetailContainer contact={this.state.contact} edit={this.state.edit} newContact={this.state.newContact} />
     );
   }
 }

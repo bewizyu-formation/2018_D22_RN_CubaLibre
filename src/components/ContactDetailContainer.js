@@ -4,7 +4,7 @@ import {
   ScrollView, View, Text, Image, StyleSheet, Linking, TouchableOpacity, TextInput, Picker,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { updateContact } from '../redux/store/contacts.action';
+import { updateContact, addContact } from '../redux/store/contacts.action';
 import { Colors } from '../Colors';
 
 const styles = StyleSheet.create({
@@ -129,6 +129,7 @@ export class ContactDetailContainer extends Component {
       gravatar: this.props.contact.gravatar,
       id: this.props.contact._id,
       edit: this.props.edit,
+      newContact: this.props.newContact,
     };
 
     if (this.state.profile === 'MEDECIN') {
@@ -192,11 +193,18 @@ export class ContactDetailContainer extends Component {
         gravatar: this.state.gravatar,
         _id: this.state.id,
       };
-      this.props.callBack(contact);
+      
+      if(this.state.newContact) {
+        this.props.addContact(contact);
+      } else {
+        this.props.updateContact(contact);
+      }
     }
+
 
     this.setState({
       edit: !this.state.edit,
+      newContact: false,
     });
   }
 
@@ -324,6 +332,7 @@ const mapStateToProps = state => ({});
 
 const mapDispatchToProps = dispatch => ({
   updateContact: contact => dispatch(updateContact(contact)),
+  addContact: contact => dispatch(addContact(contact)),
 });
 
 export default connect(
@@ -345,4 +354,5 @@ ContactDetailContainer.propTypes = {
   }).isRequired,
   edit: PropTypes.bool.isRequired,
   updateContact: PropTypes.func.isRequired,
+  addContact: PropTypes.func.isRequired,
 };
