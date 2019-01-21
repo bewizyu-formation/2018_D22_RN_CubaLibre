@@ -1,4 +1,6 @@
-import { ADD_CONTACT, LOAD_CONTACTS, CONTACTS_LOADED, LOG_IN, LOAD_PROFILES, PROFILES_LOADED } from './contacts.action';
+import {
+  ADD_CONTACT, LOAD_CONTACTS, CONTACTS_LOADED, LOG_IN,
+} from './contacts.action';
 
 export const initialState = {
   list: [],

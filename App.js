@@ -1,6 +1,7 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { createLogger } from 'redux-logger';
+import { View, Image } from 'react-native';
 
 import React, { Component } from 'react';
 import thunk from 'redux-thunk';
@@ -23,13 +24,20 @@ const store = createStore(reducers, applyMiddleware(thunk, logger));
 export default class App extends Component {
   render() {
     return (
+      <View style={styles.container}>
+        <Image
+          style={styles.images} source={require('../../assets/Familink.png')}>
+        </Image>
+      </View>
+    );
+  }
+}
+
+/*
       <Provider store={store}>
         <AppContainer
           ref={navigatorRef => {
             NavigationService.setTopLevelNavigator(navigatorRef);
           }}
         />
-      </Provider>
-    );
-  }
-}
+      </Provider>*/

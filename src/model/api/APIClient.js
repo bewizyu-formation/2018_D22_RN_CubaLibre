@@ -15,12 +15,13 @@ const EXPIRED_JWT = 'EXPIRED_JWT';
 
 function manageExpiredJwt(responseApi) {
   const answer = responseApi.then((response) => {
-    if (response.status === 401) {
+    if (response.status == 401) {
       NavigationService.navigate('Connection', { reason: EXPIRED_JWT });
     }
     return response.json();
   });
-  return answer.then(json => json);
+  return answer.then(json => json).catch((error) => {
+  });
 }
 
 export function login(phone, password) {
