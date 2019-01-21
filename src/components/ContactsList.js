@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { Text, View, FlatList, StyleSheet, TextInput, Button, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { loadContacts, updateContact, loadProfiles } from '../redux/store/contacts.action';
-
 import ContactItem from './ContactItem';
 
 const styles = StyleSheet.create({
@@ -92,7 +91,7 @@ class ContactsList extends Component {
     return (
       <Button key={key}
         style={styles.button}
-        color='#00008b'
+        color='#03436A'
         title={name} onPress={() => this.filterByType(profile)}>
       </Button>
     )
@@ -102,6 +101,7 @@ class ContactsList extends Component {
     return (
       <Button key={key}
         style={styles.button}
+        color='#3D9AD1'
         title={name} onPress={() => this.filterByType(profile)}>
       </Button>
     )
