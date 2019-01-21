@@ -4,10 +4,14 @@ import {
 
 export const initialState = {
   list: [],
+  profiles: [],
+  loadProfiles: false,
   loading: false,
   loaded: false,
 };
 export function contactsReducer(state = initialState, action) {
+  console.log('toto');
+  console.log(action);
   switch (action.type) {
     case LOAD_CONTACTS:
       return {
@@ -36,6 +40,17 @@ export function contactsReducer(state = initialState, action) {
       return {
         ...state,
         list: [...state.list, contact],
+      };
+    case LOAD_PROFILES:
+      return {
+        ...state,
+        loadProfiles: true,
+      };
+    case PROFILES_LOADED:
+      return {
+        ...state,
+        profiles: action.profiles,
+        loadProfiles: false,
       };
     case LOG_IN:
       return {

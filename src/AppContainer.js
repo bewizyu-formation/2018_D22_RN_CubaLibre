@@ -34,12 +34,19 @@ stackNavigatorConfig[CONTACTDETAIL_SCENE_NAME] = {
 stackNavigatorConfig[LOADING_SCENE_NAME] = {
   screen: LoadingScreen,
 };
+// let homeScreen = ConnectionScreen;
+// if (getJWT()) {
+//   homeScreen = ContactsListScreen;
+// }
 
 const applicationNavigator = createStackNavigator(
   {
     Home: {
       screen: LoadingScreen,
     },
+    // Home: {
+    //   screen: homeScreen
+    // },
     Connection: {
       screen: ConnectionScreen,
     },
