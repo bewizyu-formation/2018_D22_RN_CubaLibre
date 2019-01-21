@@ -49,6 +49,9 @@ const styles = StyleSheet.create({
     marginRight: 8,
     marginLeft: 16,
   },
+  flatlistview: {
+    marginBottom: 110
+  }
 });
 
 class ContactsList extends Component {
@@ -190,7 +193,7 @@ class ContactsList extends Component {
                 autoCorrect={false}
               />
             </View>
-            <View>
+            <View style={styles.flatlistview}>
               <FlatList
                 data={this.state.filteredContacts}
                 renderItem={this.renderItem}

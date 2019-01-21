@@ -182,7 +182,7 @@ export class ContactDetailContainer extends Component {
 
   changeEditStatus() {
     if (this.state.edit) {
-      const contact = {
+      let contact = {
         phone: this.state.phone,
         firstName: this.state.firstName,
         lastName: this.state.lastName,
@@ -195,6 +195,9 @@ export class ContactDetailContainer extends Component {
       };
       
       if(this.state.newContact) {
+        contact.isFamilinkUser = false;
+        contact.isEmergencyUser = false;
+        gravatar = '';
         this.props.addContact(contact);
       } else {
         this.props.updateContact(contact);

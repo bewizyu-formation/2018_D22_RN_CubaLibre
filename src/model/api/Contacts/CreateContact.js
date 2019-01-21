@@ -17,15 +17,6 @@ export default async function CreateContact(user) {
       method: 'POST',
       headers,
       body: JSON.stringify(user),
-    }).then(response => response.json())
-      .then((json) => {
-        if (json.message) {
-          return json.message;
-        }
-        return json;
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    });
   });
 }

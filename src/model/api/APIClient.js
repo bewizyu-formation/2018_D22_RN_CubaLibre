@@ -1,5 +1,6 @@
 import getContactList from './Contacts/GetContactList';
 import createContactFunc from './Contacts/CreateContact';
+import updateContactFunc from './Contacts/UpdateContact';
 
 import getUsersFunc from './Users/GetUsers';
 import createUserFunc from './Users/CreateUser';
@@ -14,13 +15,20 @@ import NavigationService from '../../NavigationService';
 const EXPIRED_JWT = 'EXPIRED_JWT';
 
 function manageExpiredJwt(responseApi) {
+  console.log('test');
   const answer = responseApi.then((response) => {
+    console.log('test');
+    console.log(response);
     if (response.status == 401) {
       NavigationService.navigate('Connection', { reason: EXPIRED_JWT });
     }
     return response.json();
   });
-  return answer.then(json => json).catch((error) => {
+  return answer.then((json) => {
+    console.log('test2');
+    console.log(json);
+    return json
+  }).catch((error) => {
   });
 }
 
@@ -59,4 +67,8 @@ export function getUsers() {
 
 export function getAuthenticatedUser() {
   return manageExpiredJwt(getAuthenticatedUserFunc());
+}
+
+export function updateContactonApi(contact) {
+  return manageExpiredJwt(updateContactFunc(contact));
 }
