@@ -86,7 +86,7 @@ export function loadContacts() {
 export function loadProfiles() {
   return (dispatch) => {
     dispatch({ type: LOAD_PROFILES });
-    return profilesFetch()
+    return getProfiles()
       .then(profiles => dispatch(profilesLoaded(profiles)));
   };
 }
