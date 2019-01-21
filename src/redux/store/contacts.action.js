@@ -1,5 +1,5 @@
 import {
-  login, getContacts, getProfiles, createContact,
+  login, getContacts, getProfiles, createContact, createUser,
 } from '../../model/api/APIClient';
 
 export const ADD_CONTACT = 'ADD_CONTACT';
@@ -7,6 +7,8 @@ export const UPDATE_CONTACT = 'UPDATE_CONTACT';
 export const LOAD_CONTACTS = 'LOAD_CONTACTS';
 export const CONTACTS_LOADED = 'CONTACTS_LOADED';
 export const LOG_IN = 'LOG_IN';
+export const ADD_USER = 'ADD_USER';
+// export const DELETE_CONTACT = 'DELETE_CONTACT';
 export const LOAD_PROFILES = 'LOAD_PROFILES';
 export const PROFILES_LOADED = 'PROFILES_LOADED';
 
@@ -93,7 +95,7 @@ export function loadContacts() {
 export function loadProfiles() {
   return (dispatch) => {
     dispatch({ type: LOAD_PROFILES });
-    return profilesFetch()
+    return getProfiles()
       .then(profiles => dispatch(profilesLoaded(profiles)));
   };
 }
@@ -102,9 +104,9 @@ export function logIn(phone, password, callback) {
   return (dispatch) => {
     dispatch({ type: LOG_IN });
     return login(phone, password).then((errorMessage) => {
-      callback(errorMessage);
-    });
-  };
+      callback(errorMessage)
+    })
+  }
 }
 
 const addContactFetch = contact => new Promise((resolve) => {
@@ -117,9 +119,16 @@ export function addContact(contact) {
   return (dispatch) => {
     return addContactFetch(contact)
       .then((contact) => {
-        console.log('yyy');
-        console.log(contact);
         dispatch({ type: ADD_CONTACT, contact });
       });
   };
+}
+export function addUser(phone, password, firstName, lastName, email, profile, callback){
+  const user = {phone, firstName, lastName, email, profile}
+  return (dispatch) => {
+    dispatch({type: ADD_USER});
+    return createUser(user, password, 0).then((errorMessage) => {
+      callback(errorMessage)
+    })
+  }
 }
