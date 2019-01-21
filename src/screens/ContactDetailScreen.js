@@ -15,13 +15,17 @@ const styles = StyleSheet.create({
 });
 
 export default class ContactDetailScreen extends Component {
-  static navigationOptions = () => ({
-    headerRight: (
-      <TouchableHighlight onPress={() => Alert.alert('Supprimer')}>
-        <Image style={styles.icon} source={require('../../assets/delete.png')} />
-      </TouchableHighlight>
-    ),
-  });
+  static navigationOptions = () => {
+    return {
+      headerRight: (
+        <>
+          <TouchableHighlight onPress={() => Alert.alert('Supprimer')}>
+            <Image style={styles.icon} source={require('../../assets/delete.png')} />
+          </TouchableHighlight>
+        </>
+      ),
+    };
+  };
 
   constructor(props) {
     super(props);
@@ -30,7 +34,6 @@ export default class ContactDetailScreen extends Component {
       contact: this.props.navigation.getParam('contact', 'NO-CONTACT'),
     };
   }
-
 
   render() {
     return (

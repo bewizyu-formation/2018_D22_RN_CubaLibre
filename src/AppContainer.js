@@ -44,10 +44,10 @@ const applicationNavigator = createStackNavigator(
     //   screen: homeScreen
     // },
     Connection: {
-      screen: ConnectionScreen
+      screen: ConnectionScreen,
     },
     SignUp: {
-      screen: SignUpScreen
+      screen: SignUpScreen,
     },
     PasswordForgotten: {
       screen: PasswordForgottenScreen,
