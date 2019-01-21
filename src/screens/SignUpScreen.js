@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, StyleSheet, TouchableOpacity, TextInput, Picker } from 'react-native';
 import { connect } from 'react-redux';
-import {addUser} from '../redux/store/contacts.action';
+import {addUser, logIn} from '../redux/store/contacts.action';
 
 export const SIGN_UP_SCENE_NAME = 'SIGN_UP_SCENE';
 
@@ -119,11 +119,17 @@ export class SignUpScreen extends Component {
         }
         if (error === false) {
             this.props.addUser(this.state.phone, this.state.password, this.state.firstname, this.state.lastname, this.state.email, this.state.profile, (errorMessage) => {
-                if (errorMessage) {
-                    alert(errorMessage)
-                } else {
-                    alert('ok :)')
-                //this.props.navigation.navigate('ContactsList');
+                if (errorMessage.message) {
+                    alert(errorMessage.message);
+                }
+                else {
+                    this.props.logIn(this.state.phone, this.state.password, (errorMessage) => {
+                        if (errorMessage) {
+                            alert(errorMessage);
+                        } else {
+                            this.props.navigation.navigate('ContactsList');
+                        }
+                    })
                 }
             });
         }
@@ -221,6 +227,7 @@ const mapStateToProps = state => ({
 
 });
 const mapDispatchToProps = dispatch => ({
+    logIn: (phone, password, callback) => dispatch(logIn(phone, password, callback)),
     addUser: (phone, password, firstName, lastName, email, profile, callback) => dispatch(addUser(phone, password, firstName, lastName, email, profile, callback)),
 });
 
