@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Text, View, FlatList, StyleSheet, TextInput, Button, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
-import { loadContacts, loadProfiles } from '../redux/store/contacts.action';
+import { loadContacts, updateContact, loadProfiles } from '../redux/store/contacts.action';
+
 import ContactItem from './ContactItem';
 
 const styles = StyleSheet.create({
@@ -32,12 +33,14 @@ class ContactsList extends Component {
     super(props);
 
     this.state = {
+
       filter: '',
       selectedProfile: '',
       contacts: [],
       profiles: []
     }
 
+   this.updateContact = this.updateContact.bind(this);
     this.filterByType = this.filterByType.bind(this.filterByType);
     this.changeSearchBar = this.changeSearchBar.bind(this.changeSearchBar);
     this.filterContacts = this.filterContacts.bind(this.filterContacts);
@@ -50,12 +53,15 @@ class ContactsList extends Component {
     this.props.loadProfiles();
   }
 
-  keyExtractor = (item, index) => item.phone; // eslint-disable-line no-unused-vars
+  keyExtractor = (item, index) => `${item.firstName}${item.lastName}${item.phone}${item.email}${item.profile}`; // eslint-disable-line no-unused-vars
 
   renderItem = ({ item }) => (
-    <ContactItem contact={item} key={item.phone} />
+    <ContactItem contact={item} key={item.phone} callBack={this.updateContact} />
   )
 
+  updateContact(contact) {
+    this.props.updateContact(contact);
+  }
   changeSearchBar = (filter) => {
     this.setState({ filter }, () => {
       this.filterContacts();
@@ -169,6 +175,7 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = dispatch => ({
   loadContacts: () => dispatch(loadContacts()),
+  updateContact: contact => dispatch(updateContact(contact)),
   loadProfiles: () => dispatch(loadProfiles()),
 });
 
@@ -180,6 +187,7 @@ export default connect(
 
 ContactsList.propTypes = {
   loadContacts: PropTypes.func.isRequired,
+  updateContact: PropTypes.func.isRequired,
   loadProfiles: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   contacts: PropTypes.arrayOf(

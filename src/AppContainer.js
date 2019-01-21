@@ -45,7 +45,7 @@ const applicationNavigator = createStackNavigator(
     //   screen: LoadingScreen,
     // },
     Home: {
-      screen: homeScreen
+      screen: homeScreen,
     },
     Connection: {
       screen: ConnectionScreen,

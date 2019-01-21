@@ -1,6 +1,7 @@
 import { login, getContacts, getProfiles } from '../../model/api/APIClient';
 
 export const ADD_CONTACT = 'ADD_CONTACT';
+export const UPDATE_CONTACT = 'UPDATE_CONTACT';
 export const LOAD_CONTACTS = 'LOAD_CONTACTS';
 export const CONTACTS_LOADED = 'CONTACTS_LOADED';
 export const LOG_IN = 'LOG_IN';
@@ -52,6 +53,13 @@ export function addContact(phone, firstName, lastName, email,
     isFamilinkUser,
     profile,
     gravatar,
+  };
+}
+
+export function updateContact(contact) {
+  return {
+    type: UPDATE_CONTACT,
+    contact,
   };
 }
 
