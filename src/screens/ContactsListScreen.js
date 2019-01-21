@@ -13,16 +13,22 @@ export default class ContactsListScreen extends Component {
   constructor(props) {
     super(props);
 
-    this.getContactDetail = (contact, callBack) => {
+    this.getContactDetail = (contact) => {
       this.props.navigation.navigate('Details', {
         contact,
-        callBack,
         edit: false,
+      });
+    };
+
+    this.addContact = () => {
+      this.props.navigation.navigate('Details', {
+        edit: true,
       });
     };
 
     this.state = {
       getContactDetail: this.getContactDetail,
+      addContact: this.addContact,
     };
   }
 
