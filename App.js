@@ -1,6 +1,7 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { createLogger } from 'redux-logger';
+import { View, Image } from 'react-native';
 
 import React, { Component } from 'react';
 import thunk from 'redux-thunk';
@@ -33,3 +34,9 @@ export default class App extends Component {
     );
   }
 }
+
+    // <View style={styles.container}>
+    //   <Image
+    //     style={styles.images} source={require('./assets/Familink.png')}>
+    //   </Image>
+    // </View>

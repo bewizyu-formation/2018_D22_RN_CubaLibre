@@ -3,8 +3,9 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 import ContactsListScreen, { CONTACTSLIST_SCENE_NAME } from './screens/ContactsListScreen';
 import ContactDetailScreen, { CONTACTDETAIL_SCENE_NAME } from './screens/ContactDetailScreen';
 import ConnectionScreen, { CONNECTION_SCENE_NAME } from './screens/ConnectionScreen';
-import SignUpScreen, {SIGN_UP_SCENE_NAME} from './screens/SignUpScreen';
-import PasswordForgottenScreen, {PASSWORD_FORGOTTEN_SCENE_NAME} from './screens/PasswordForgottenScreen';
+import SignUpScreen, { SIGN_UP_SCENE_NAME } from './screens/SignUpScreen';
+import PasswordForgottenScreen, { PASSWORD_FORGOTTEN_SCENE_NAME } from './screens/PasswordForgottenScreen';
+import LoadingScreen, { LOADING_SCENE_NAME } from './screens/LoadingScreen';
 
 import { getJWT } from './model/dataStorage/AStorage';
 
@@ -30,24 +31,27 @@ stackNavigatorConfig[CONTACTDETAIL_SCENE_NAME] = {
   screen: ContactDetailScreen,
 };
 
-// let homeScreen = ConnectionScreen;
-// if (getJWT()) {
-//   homeScreen = ContactsListScreen;
-// }
+stackNavigatorConfig[LOADING_SCENE_NAME] = {
+  screen: LoadingScreen,
+};
+let homeScreen = ConnectionScreen;
+if (getJWT()) {
+  homeScreen = ContactsListScreen;
+}
 
 const applicationNavigator = createStackNavigator(
   {
-    Home: {
-      screen: ConnectionScreen
-    },
     // Home: {
-    //   screen: homeScreen
+    //   screen: LoadingScreen,
     // },
+    Home: {
+      screen: homeScreen,
+    },
     Connection: {
-      screen: ConnectionScreen
+      screen: ConnectionScreen,
     },
     SignUp: {
-      screen: SignUpScreen
+      screen: SignUpScreen,
     },
     PasswordForgotten: {
       screen: PasswordForgottenScreen,

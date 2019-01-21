@@ -11,7 +11,7 @@ import forgotPasswordFunc from './Users/forgotPassword';
 
 import NavigationService from '../../NavigationService';
 
-const EXPIRED_JWT = 'EXPIRED_JWT'
+const EXPIRED_JWT = 'EXPIRED_JWT';
 
 function manageExpiredJwt(responseApi) {
   console.log('je passe');
@@ -28,7 +28,7 @@ function manageExpiredJwt(responseApi) {
     console.log('poire');
     console.log(json);
     return json;
-  })
+  });
 }
 
 export function login(phone, password) {

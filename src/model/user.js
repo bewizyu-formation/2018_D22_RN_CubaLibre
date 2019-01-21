@@ -1,8 +1,8 @@
 const userStore = {
-    phone: '',
-    password: '',
-    firstName: '',
-    lastName: '',
-    email: '',
-    profile: '',
-  };
+  phone: '',
+  password: '',
+  firstName: '',
+  lastName: '',
+  email: '',
+  profile: '',
+};
