@@ -61,6 +61,12 @@ const mockFetch = () => new Promise((resolve) => {
   });
 });
 
+const profilesFetch = () => new Promise((resolve) => {
+  getProfiles().then((profiles) => {
+    resolve(profiles);
+  });
+});
+
 export function contactsLoaded(contacts) {
   return {
     type: CONTACTS_LOADED,
