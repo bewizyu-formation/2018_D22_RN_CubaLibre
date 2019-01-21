@@ -1,4 +1,6 @@
-import { login, getContacts, createUser, getProfiles } from '../../model/api/APIClient';
+import {
+  login, getContacts, getProfiles, createContact, createUser,
+} from '../../model/api/APIClient';
 
 export const ADD_CONTACT = 'ADD_CONTACT';
 export const UPDATE_CONTACT = 'UPDATE_CONTACT';
@@ -43,25 +45,16 @@ const mockedContacts = [
   },
 ];
 
-export function addContact(phone, firstName, lastName, email,
-  isEmergencyUser, isFamilinkUser, profile, gravatar) {
-  return {
-    type: ADD_CONTACT,
-    phone,
-    firstName,
-    lastName,
-    email,
-    isEmergencyUser,
-    isFamilinkUser,
-    profile,
-    gravatar,
-  };
-}
-
 export function updateContact(contact) {
-  return {
-    type: UPDATE_CONTACT,
-    contact,
+  // return {
+  //   type: UPDATE_CONTACT,
+  //   contact,
+  // };
+
+  return (dispatch) => {
+    dispatch({ type: ADD_CONTACT });
+    return addContactFetch(contact)
+      .then(contacts => dispatch(contactsLoaded(contacts)));
   };
 }
 
@@ -116,16 +109,21 @@ export function logIn(phone, password, callback) {
   }
 }
 
+const addContactFetch = contact => new Promise((resolve) => {
+  createContact(contact).then((user) => {
+    resolve(user);
+  });
+});
+
+export function addContact(contact) {
+  return (dispatch) => {
+    return addContactFetch(contact)
+      .then((contact) => {
+        dispatch({ type: ADD_CONTACT, contact });
+      });
+  };
+}
 export function addUser(phone, password, firstName, lastName, email, profile, callback){
-  // return {
-  //   type: ADD_USER,
-  //   phone,
-  //   password,
-  //   firstName,
-  //   lastName,
-  //   email,
-  //   profile,
-  // };
   const user = {phone, firstName, lastName, email, profile}
   return (dispatch) => {
     dispatch({type: ADD_USER});
