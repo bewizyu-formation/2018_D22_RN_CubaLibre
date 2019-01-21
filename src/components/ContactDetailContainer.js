@@ -3,17 +3,14 @@ import PropTypes from 'prop-types';
 import {
   ScrollView, View, Text, Image, StyleSheet, Linking, TouchableOpacity, TextInput, Picker,
 } from 'react-native';
-
-const grey = '#F5FCFF';
-const black = '#000';
-const white = '#fff';
-const purple = '#841584';
-const yellow = '#f4e542';
+import { connect } from 'react-redux';
+import { updateContact } from '../redux/store/contacts.action';
+import { Colors } from '../Colors';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: grey,
+    backgroundColor: Colors.grey,
     margin: 6,
   },
   imageContainer: {
@@ -50,10 +47,9 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10,
     paddingLeft: 16,
-    backgroundColor: yellow,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: white,
+    borderColor: Colors.white,
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -61,11 +57,20 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
   },
+  editNameContainer: {
+    flexDirection: 'row',
+    padding: 8,
+  },
+  editNameInput: {
+    borderRadius: 10,
+    borderWidth: 1,
+    width: '50%',
+    margin: 8,
+  },
   editButton: {
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: purple,
     position: 'absolute',
     bottom: 10,
     right: 10,
@@ -76,20 +81,40 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10,
     paddingLeft: 16,
-    backgroundColor: white,
+    backgroundColor: Colors.white,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: yellow,
     flexDirection: 'row',
     alignItems: 'center',
   },
+  familyBackgroundColor: {
+    backgroundColor: Colors.family,
+  },
+  doctorBackgroundColor: {
+    backgroundColor: Colors.doctor,
+  },
+  seniorBackgroundColor: {
+    backgroundColor: Colors.senior,
+  },
+  familyBorderColor: {
+    borderColor: Colors.family,
+  },
+  doctorBorderColor: {
+    borderColor: Colors.doctor,
+  },
+  seniorBorderColor: {
+    borderColor: Colors.senior,
+  },
   profilePicker: {
-    height: 20,
-    width: '80%',
+    width: 200,
+    height: 44,
+  },
+  itemPicker: {
+    height: 44,
   },
 });
 
-export default class ContactDetailContainer extends Component {
+export class ContactDetailContainer extends Component {
   constructor(props) {
     super(props);
 
@@ -102,19 +127,38 @@ export default class ContactDetailContainer extends Component {
       isFamilinkUser: this.props.contact.isFamilinkUser,
       isEmergencyUser: this.props.contact.isEmergencyUser,
       gravatar: this.props.contact.gravatar,
-      edit: false,
+      id: this.props.contact._id,
+      edit: this.props.edit,
     };
 
+    if (this.state.profile === 'MEDECIN') {
+      this.colorThemeBackground = styles.doctorBackgroundColor;
+      this.colorThemeBorder = styles.doctorBorderColor;
+    } else if (this.state.profile === 'FAMILLE') {
+      this.colorThemeBackground = styles.familyBackgroundColor;
+      this.colorThemeBorder = styles.familyBorderColor;
+    } else {
+      this.colorThemeBackground = styles.seniorBackgroundColor;
+      this.colorThemeBorder = styles.seniorBorderColor;
+    }
+
     this.changeEditStatus = this.changeEditStatus.bind(this);
+    this.contactName = this.contactName.bind(this);
     this.callButton = this.callButton.bind(this);
     this.emailButton = this.emailButton.bind(this);
     this.profilePicker = this.profilePicker.bind(this);
   }
 
-  static getDerivedStateFromProps(props, state) {
-    return {
-      edit: state.edit,
-    };
+  handleFirstNameChange(text) {
+    this.setState({
+      firstName: text,
+    });
+  }
+
+  handleLastNameChange(text) {
+    this.setState({
+      lastName: text,
+    });
   }
 
   handlePhoneChange(text) {
@@ -136,26 +180,55 @@ export default class ContactDetailContainer extends Component {
   }
 
   changeEditStatus() {
+    if (this.state.edit) {
+      const contact = {
+        phone: this.state.phone,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.email,
+        profile: this.state.profile,
+        isFamilinkUser: this.state.isFamilinkUser,
+        isEmergencyUser: this.state.isEmergencyUser,
+        gravatar: this.state.gravatar,
+        _id: this.state.id,
+      };
+      this.props.callBack(contact);
+    }
+
     this.setState({
       edit: !this.state.edit,
     });
+  }
+
+  contactName() {
+    if (this.state.edit) {
+      return (
+        <View style={styles.editNameContainer}>
+          <TextInput style={[styles.editNameInput, this.colorThemeBorder]} placeholder="Prénom" value={this.state.firstName} onChangeText={text => this.handleFirstNameChange(text)} />
+          <TextInput style={[styles.editNameInput, this.colorThemeBorder]} placeholder="Nom" value={this.state.lastName} onChangeText={text => this.handleLastNameChange(text)} />
+        </View>
+      );
+    }
+    return (
+      <Text style={styles.name}>{`${this.state.firstName} ${this.state.lastName}`}</Text>
+    );
   }
 
   callButton() {
     if (this.state.edit) {
       return (
         <TouchableOpacity
-          style={styles.editActionButton}
+          style={[styles.editActionButton, this.colorThemeBorder]}
           underlayColor="#fff"
         >
           <Image style={styles.icon} source={require('../../assets/phone.png')} />
-          <TextInput value={this.state.phone} onChangeText={text => this.handlePhoneChange(text)} />
+          <TextInput value={this.state.phone} placeholder="N° téléphone" onChangeText={text => this.handlePhoneChange(text)} />
         </TouchableOpacity>
       );
     }
     return (
       <TouchableOpacity
-        style={styles.actionButton}
+        style={[styles.actionButton, this.colorThemeBackground]}
         onPress={() => Linking.openURL(`${'tel://'}${this.state.phone}`)}
         underlayColor="#fff"
       >
@@ -169,17 +242,17 @@ export default class ContactDetailContainer extends Component {
     if (this.state.edit) {
       return (
         <TouchableOpacity
-          style={styles.editActionButton}
+          style={[styles.editActionButton, this.colorThemeBorder]}
           underlayColor="#fff"
         >
           <Image style={styles.icon} source={require('../../assets/email.png')} />
-          <TextInput value={this.state.email} onChangeText={text => this.handleEmailChange(text)} />
+          <TextInput value={this.state.email} placeholder="Email" onChangeText={text => this.handleEmailChange(text)} />
         </TouchableOpacity>
       );
     }
     return (
       <TouchableOpacity
-        style={styles.actionButton}
+        style={[styles.actionButton, this.colorThemeBackground]}
         onPress={() => Linking.openURL(`${'mailto:'}${this.state.email}`)}
         underlayColor="#fff"
       >
@@ -195,12 +268,12 @@ export default class ContactDetailContainer extends Component {
         <>
           <Picker
             selectedValue={this.state.profile}
-            // style={styles.profilePicker}
-            style={{width: 200, height: 44}} itemStyle={{height: 44}}
+            style={styles.profilePicker}
+            itemStyle={styles.itemPicker}
             onValueChange={(itemValue, itemIndex) => this.setState({ profile: itemValue })}
           >
             <Picker.Item label="FAMILLE" value="FAMILLE" />
-            <Picker.Item label="AMI" value="AMI" />
+            <Picker.Item label="SENIOR" value="SENIOR" />
             <Picker.Item label="MEDECIN" value="MEDECIN" />
           </Picker>
         </>
@@ -220,7 +293,7 @@ export default class ContactDetailContainer extends Component {
               ? <Image style={styles.image} source={{ uri: this.state.gravatar }} />
               : <Image style={styles.image} source={require('../../assets/contact.png')} />
             }
-            <Text style={styles.name}>{`${this.state.firstName} ${this.state.lastName}`}</Text>
+            {this.contactName()}
           </View>
           <View>
             <View style={styles.info}>
@@ -236,7 +309,7 @@ export default class ContactDetailContainer extends Component {
           </View>
         </ScrollView>
         <TouchableOpacity
-          style={styles.editButton}
+          style={[styles.editButton, this.colorThemeBackground]}
           onPress={() => this.changeEditStatus()}
           underlayColor="#fff"
         >
@@ -247,6 +320,17 @@ export default class ContactDetailContainer extends Component {
   }
 }
 
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = dispatch => ({
+  updateContact: contact => dispatch(updateContact(contact)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ContactDetailContainer);
+
 ContactDetailContainer.propTypes = {
   contact: PropTypes.shape({
     phone: PropTypes.string.isRequired,
@@ -256,6 +340,9 @@ ContactDetailContainer.propTypes = {
     profile: PropTypes.string.isRequired,
     isFamilinkUser: PropTypes.bool.isRequired,
     isEmergencyUser: PropTypes.bool.isRequired,
+    _id: PropTypes.string.isRequired,
     gravatar: PropTypes.string.isRequired,
   }).isRequired,
+  edit: PropTypes.bool.isRequired,
+  updateContact: PropTypes.func.isRequired,
 };

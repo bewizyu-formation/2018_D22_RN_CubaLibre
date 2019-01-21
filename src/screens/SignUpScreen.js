@@ -200,4 +200,3 @@ export default class SignUpScreen extends Component {
         );
     }
 }
-
