@@ -132,7 +132,7 @@ class ContactsList extends Component {
     return (
       <Button key={key}
         style={styles.button}
-        color='#00008b'
+        color='#03436A'
         title={name} onPress={() => this.filterByType(profile)}>
       </Button>
     )
@@ -142,6 +142,7 @@ class ContactsList extends Component {
     return (
       <Button key={key}
         style={styles.button}
+        color='#3D9AD1'
         title={name} onPress={() => this.filterByType(profile)}>
       </Button>
     )
@@ -242,7 +243,6 @@ export default connect(
 
 ContactsList.propTypes = {
   loadContacts: PropTypes.func.isRequired,
-  updateContact: PropTypes.func.isRequired,
   loadProfiles: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   contacts: PropTypes.arrayOf(

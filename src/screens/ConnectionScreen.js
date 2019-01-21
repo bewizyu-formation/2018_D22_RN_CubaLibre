@@ -4,15 +4,11 @@ import {
   TextInput, View, Text, Image, StyleSheet, TouchableOpacity,
 } from 'react-native';
 import { logIn } from '../redux/store/contacts.action';
-
+import { Colors } from '../Colors';
 
 import NavigationService from '../NavigationService';
 
 export const CONNECTION_SCENE_NAME = 'CONNECTION_SCENE';
-
-
-const white = '#fff';
-const blue = '#015666';
 
 const styles = StyleSheet.create({
   container: {
@@ -29,13 +25,13 @@ const styles = StyleSheet.create({
     marginTop: 10,
     paddingTop: 10,
     paddingBottom: 10,
-    backgroundColor: blue,
+    backgroundColor: Colors.darkBlue,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: white,
+    borderColor: Colors.white,
   },
   buttonTextConnect: {
-    color: white,
+    color: Colors.white,
     textAlign: 'center',
     paddingLeft: 10,
     paddingRight: 10,
@@ -43,6 +39,7 @@ const styles = StyleSheet.create({
   images: {
     width: 100,
     height: 100,
+    borderRadius: 10
   },
 });
 
@@ -98,7 +95,7 @@ export class ConnectionScreen extends Component {
         <View style={styles.container}>
           <Image
             style={styles.images}
-            source={require('../../assets/Logo.png')}
+            source={require('../../assets/Familink.png')}
           />
           <TextInput
             keyboardType="numeric"

@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
   actionButtonText: {
     paddingLeft: 10,
     paddingRight: 10,
+  //  color: Colors.white,
   },
   editNameContainer: {
     flexDirection: 'row',

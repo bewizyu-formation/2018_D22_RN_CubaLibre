@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 import { ScrollView, Text, StyleSheet, TouchableOpacity, TextInput, Picker } from 'react-native';
 import { connect } from 'react-redux';
 import {addUser, logIn} from '../redux/store/contacts.action';
+import { Colors } from '../Colors';
 
 export const SIGN_UP_SCENE_NAME = 'SIGN_UP_SCENE';
-
-const white = '#fff';
-const blue = '#015666';
-const red = '#FF0000';
 
 const styles = StyleSheet.create({
 
@@ -17,20 +14,20 @@ const styles = StyleSheet.create({
         marginTop: 10,
         paddingTop: 10,
         paddingBottom: 10,
-        backgroundColor: blue,
+        backgroundColor: Colors.darkBlue,
         borderRadius: 10,
         borderWidth: 1,
-        borderColor: white,
+        borderColor: Colors.white,
     },
     buttonText: {
-        color: white,
+        color: Colors.white,
         textAlign: 'center',
         paddingLeft: 10,
         paddingRight: 10,
     },
     textTitle: {
         marginLeft: 10,
-        color: blue,
+        color: Colors.darkBlue,
         fontSize: 15,
         fontWeight: 'bold',
     },
@@ -40,7 +37,7 @@ const styles = StyleSheet.create({
     },
     errorMessage: {
         marginLeft: 10,
-        color: red,
+        color: Colors.red,
         fontStyle: 'italic'
     }
 });
@@ -235,4 +232,4 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps,
 )(SignUpScreen);
-}
+
